@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.carousel
 import com.kinley.moviebrowsing.CastViewBindingModel_
+import com.kinley.moviebrowsing.CrewCellBindingModel_
+import com.kinley.moviebrowsing.MovieDetailBindingModel_
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.databinding.MovieDetailPageFragmentBinding
 import com.kinley.moviebrowsing.epoxy.withModelsFrom
@@ -37,14 +39,18 @@ class MovieDetailPage : Fragment() {
         val args = MovieDetailPageArgs.fromBundle(arguments!!)
         viewModel.load(args.movieId)
 
-        viewModel.movie.observe(viewLifecycleOwner, Observer {
-            v.movie = it
-        })
+        epoxy.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
+        epoxy.withModels {
 
-        rv_cast.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            val movie = viewModel.movie.value
 
-        rv_cast.withModels {
+            if (movie != null) {
+                MovieDetailBindingModel_()
+                    .id(movie.id)
+                    .movie(movie)
+                    .addTo(this)
+            }
 
             val castMembers = viewModel.cast.value ?: arrayListOf()
             carousel {
@@ -56,8 +62,22 @@ class MovieDetailPage : Fragment() {
                         .cast(cast)
                 }
             }
+
+            val crewMembers = viewModel.crew.value ?: arrayListOf()
+
+            carousel {
+                id("crew_members")
+                    .numViewsToShowOnScreen(2.8f)
+                    .withModelsFrom(crewMembers) { crew ->
+                        CrewCellBindingModel_()
+                            .id(crew.id)
+                            .crew(crew)
+                    }
+            }
         }
-        viewModel.cast.observe(viewLifecycleOwner, Observer { rv_cast.requestModelBuild() })
+        viewModel.movie.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
+        viewModel.crew.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
+        viewModel.cast.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
 
 
     }

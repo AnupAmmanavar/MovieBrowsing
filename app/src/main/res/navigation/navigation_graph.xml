@@ -18,7 +18,7 @@
         android:id="@+id/movieDetailPage"
         android:name="com.kinley.moviebrowsing.features.moviedetail.MovieDetailPage"
         android:label="movie_detail_page_fragment"
-        tools:layout="@layout/movie_detail_page_fragment" >
+        tools:layout="@layout/view_holder_movie_detail" >
         <argument
             android:name="movieId"
             app:argType="long" />

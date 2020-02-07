@@ -1,108 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
-    <data>
-        <variable
-            name="movie"
-            type="com.kinley.moviebrowsing.models.Movie" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/parent_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_background"
-        tools:context=".features.moviedetail.MovieDetailPage">
-
-        <ImageView
-            android:id="@+id/iv_poster"
-            imageURL="@{movie.poster_path}"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/tv_movie_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{movie.title}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp18"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Avengers: The endgame" />
-
-        <TextView
-            android:id="@+id/tv_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            tools:text="@string/test_avg_rating"
-            android:text="@{movie.vote_average + ``}"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/sp18"
-            app:layout_constraintEnd_toEndOf="@+id/tv_movie_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_title" />
-
-        <TextView
-            android:id="@+id/tv_runtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/light_gray"
-            android:textSize="@dimen/sp16"
-            android:text="@{movie.runtime + ` minutes`}"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster"
-            app:layout_constraintTop_toTopOf="@+id/tv_rating"
-            tools:text="138 minutes" />
-
-        <TextView
-            android:id="@+id/tv_movie_overview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{movie.overview}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/iv_poster"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
-            tools:text="@string/test_overview" />
-
-        <TextView
-            android:id="@+id/tv_revenue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{`Rs ` + movie.revenue}"
-            tools:text="@string/test_revenue"
-            android:textColor="@color/white"
-            android:background="@color/green"
-            android:padding="@dimen/padding8"
-            app:layout_constraintStart_toStartOf="@+id/tv_runtime"
-            app:layout_constraintTop_toBottomOf="@+id/tv_runtime" />
+        android:background="@color/dark_background">
 
         <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/rv_cast"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_overview" />
-
+            android:id="@+id/epoxy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
