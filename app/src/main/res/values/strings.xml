@@ -5,4 +5,7 @@
     <string name="test_movie_votes">4900 votes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_avg_rating">9.2</string>
+    <string name="test_overview">NASA employee Mohan Bhargav comes to India to take his grandmother along with him at his home abroad. During his stay at his native place, he comes across various social issues faced by the villagers and decides to take a stand for them, to improve their quality of life.</string>
+    <string name="test_revenue">14638</string>
 </resources>
