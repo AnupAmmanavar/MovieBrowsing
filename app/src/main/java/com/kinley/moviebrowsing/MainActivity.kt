@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.CarouselModelBuilder
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
@@ -25,21 +23,24 @@ class MainActivity : AppCompatActivity() {
     vm.load()
 
     epoxy_rv.withModels {
-      val movies = vm.movies.value ?: arrayListOf()
+      val contents = vm.appData.value ?: arrayListOf()
 
-      carousel {
-        id("popular")
-        numViewsToShowOnScreen(2.3f)
-        withModelsFrom(movies) { movie ->
-          MovieCellBindingModel_()
-            .id(movie.id)
-            .movie(movie)
+      contents.forEachIndexed{ index, movies ->
+
+        carousel {
+          id(index)
+          numViewsToShowOnScreen(2.3f)
+          withModelsFrom(movies) { movie ->
+            MovieCellBindingModel_()
+              .id(movie.id)
+              .movie(movie)
+          }
         }
       }
 
     }
 
-    vm.movies.observe(this, Observer {
+    vm.appData.observe(this, Observer {
       epoxy_rv.requestModelBuild()
     })
 

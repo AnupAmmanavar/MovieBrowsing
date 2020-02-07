@@ -13,7 +13,7 @@ interface MovieBrowsing {
   @GET("movie/top_rated?$API_KEY")
   suspend fun getTopRatedMovies(): PopularMovies
 
-  @GET("movie/upcoming$API_KEY")
+  @GET("movie/upcoming?$API_KEY")
   suspend fun getUpcomingMovies(): PopularMovies
 
 }
