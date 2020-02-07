@@ -43,8 +43,9 @@ class MovieDetailPage : Fragment() {
 
         epoxy.withModels {
 
-            val movie = viewModel.movie.value
+            val uiModel = viewModel.pageData.value
 
+            val movie = uiModel?.movie
             if (movie != null) {
                 MovieDetailBindingModel_()
                     .id(movie.id)
@@ -52,7 +53,7 @@ class MovieDetailPage : Fragment() {
                     .addTo(this)
             }
 
-            val castMembers = viewModel.cast.value ?: arrayListOf()
+            val castMembers = uiModel?.castMembers ?: arrayListOf()
             carousel {
                 id("castMembers")
                 numViewsToShowOnScreen(2.8f)
@@ -63,7 +64,7 @@ class MovieDetailPage : Fragment() {
                 }
             }
 
-            val crewMembers = viewModel.crew.value ?: arrayListOf()
+            val crewMembers = uiModel?.crewMembers ?: arrayListOf()
 
             carousel {
                 id("crew_members")
@@ -75,11 +76,7 @@ class MovieDetailPage : Fragment() {
                     }
             }
         }
-        viewModel.movie.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
-        viewModel.crew.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
-        viewModel.cast.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
-
-
+        viewModel.pageData.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
     }
 
 }

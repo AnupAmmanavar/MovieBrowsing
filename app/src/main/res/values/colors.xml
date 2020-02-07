@@ -8,5 +8,6 @@
     <color name="light_gray">#DCDCDC</color>
     <color name="dark_background">#171A2B</color>
     <color name="green">#3CB371</color>
+    <color name="burgundy">#800020</color>
     <color name="dark_green">#101820</color>
 </resources>

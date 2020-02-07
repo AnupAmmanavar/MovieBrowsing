@@ -13,26 +13,44 @@ class MovieDetailPageViewModel : ViewModel() {
 
     private val repository = MovieBrowsingRemoteImpl()
 
-    val movie: MutableLiveData<Movie> = MutableLiveData()
-
-    val cast: MutableLiveData<List<Cast>> = MutableLiveData()
-
-    val crew: MutableLiveData<List<Crew>> = MutableLiveData()
+    val pageData: MutableLiveData<MovieDetailPageUiModel> = MutableLiveData()
 
     fun load(id: Long) {
+        loadMovieDetails(id)
+        loadCastAndCrew(id)
+    }
+
+    private fun loadMovieDetails(id: Long) {
         viewModelScope.launch {
             val _movie = repository.getMovieDetails(id)
-            movie.postValue(_movie)
+            updateState { it.copy(movie = _movie) }
         }
+    }
 
+    private fun loadCastAndCrew(id: Long) {
         viewModelScope.launch {
             val credits = repository.getCredits(id)
             val castMembers = credits.cast.filter { it.profile_path != null }
             val crewMembers = credits.crew.filter { it.profile_path != null }
 
-            cast.postValue(castMembers)
-            crew.postValue(crewMembers)
+            updateState {
+                it.copy(
+                    castMembers = castMembers,
+                    crewMembers = crewMembers
+                )
+            }
         }
+    }
 
+    private fun updateState(block: (MovieDetailPageUiModel) -> MovieDetailPageUiModel) {
+        val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null)
+        pageData.postValue(block.invoke(uiModel))
     }
 }
+
+
+data class MovieDetailPageUiModel(
+    val movie: Movie?,
+    val crewMembers: List<Crew>?,
+    val castMembers: List<Cast>?
+)
