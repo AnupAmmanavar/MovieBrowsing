@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 class HomePageViewModel : ViewModel() {
 
 
-  var movies: MutableLiveData<List<Movie>> = MutableLiveData()
   var appData: MutableLiveData<MutableList<List<Movie>>> = MutableLiveData()
   private val repository = MovieBrowsingRemoteImpl()
 
@@ -25,12 +24,12 @@ class HomePageViewModel : ViewModel() {
 
   }
 
-    private suspend fun setData(movieList: List<Movie>) {
-        val list = withContext(Dispatchers.Default) {
-            val list = appData.value ?: mutableListOf()
-            list.add(movieList)
-            list
-        }
-        appData.postValue(list)
+  private suspend fun setData(movieList: List<Movie>) {
+    val list = withContext(Dispatchers.Default) {
+      val list = appData.value ?: mutableListOf()
+      list.add(movieList)
+      list
     }
+    appData.postValue(list)
+  }
 }
