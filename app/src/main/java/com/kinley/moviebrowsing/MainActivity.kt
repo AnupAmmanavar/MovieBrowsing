@@ -14,56 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-  private val vm: HomePageViewModel by viewModels()
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
-    vm.load()
-
-    epoxy_rv.withModels {
-      val contents = vm.appData.value ?: arrayListOf()
-
-      contents.forEachIndexed{ index, movies ->
-
-        carousel {
-          id(index)
-          numViewsToShowOnScreen(2.3f)
-          withModelsFrom(movies) { movie ->
-            MovieCellBindingModel_()
-              .id(movie.id)
-              .movie(movie)
-          }
-        }
-      }
-
-    }
-
-    vm.appData.observe(this, Observer {
-      epoxy_rv.requestModelBuild()
-    })
-
   }
-}
-
-/** For use in the buildModels method of EpoxyController. A shortcut for creating a Carousel model, initializing it, and adding it to the controller.
- *
- */
-inline fun EpoxyController.carousel(modelInitializer: CarouselModelBuilder.() -> Unit) {
-  CarouselModel_().apply {
-    modelInitializer()
-  }.addTo(this)
-}
-
-/** Add models to a CarouselModel_ by transforming a list of items into EpoxyModels.
- *
- * @param items The items to transform to models
- * @param modelBuilder A function that take an item and returns a new EpoxyModel for that item.
- */
-inline fun <T> CarouselModelBuilder.withModelsFrom(
-  items: List<T>,
-  modelBuilder: (T) -> EpoxyModel<*>
-) {
-  models(items.map { modelBuilder(it) })
 }

@@ -3,4 +3,6 @@
     <string name="test_movie_name">Movie name</string>
     <string name="test_movie_rating">4.5</string>
     <string name="test_movie_votes">4900 votes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
