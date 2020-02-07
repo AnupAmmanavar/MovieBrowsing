@@ -16,12 +16,16 @@ interface MovieBrowsingRemote {
   suspend fun getMovieDetails(id: Long): Movie
 
   suspend fun getCredits(id: Long): MovieCredits
+
+  suspend fun getRecommendedMovies(id: Long): PopularMovies
+
+  suspend fun getSimilarMovies(id: Long): PopularMovies
 }
 
 class MovieBrowsingRemoteImpl(
 
 ) : MovieBrowsingRemote {
-  val service = RetrofitServiceFactory.generateService()
+  private val service = RetrofitServiceFactory.generateService()
 
   override suspend fun getPopularMovies(): PopularMovies = service.getPopularMovies()
 
@@ -32,4 +36,8 @@ class MovieBrowsingRemoteImpl(
   override suspend fun getMovieDetails(id: Long): Movie = service.getMovie(id)
 
   override suspend fun getCredits(id: Long): MovieCredits = service.getCredits(id)
+
+  override suspend fun getRecommendedMovies(id: Long): PopularMovies = service.getMovieRecommendations(id)
+
+  override suspend fun getSimilarMovies(id: Long): PopularMovies = service.getSimilarMovies(id)
 }

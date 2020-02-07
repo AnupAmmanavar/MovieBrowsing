@@ -10,13 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.carousel
-import com.kinley.moviebrowsing.CastViewBindingModel_
-import com.kinley.moviebrowsing.CrewCellBindingModel_
-import com.kinley.moviebrowsing.MovieDetailBindingModel_
-import com.kinley.moviebrowsing.R
+import com.kinley.moviebrowsing.*
 import com.kinley.moviebrowsing.databinding.MovieDetailPageFragmentBinding
 import com.kinley.moviebrowsing.epoxy.withModelsFrom
+import com.kinley.moviebrowsing.models.Movie
 import kotlinx.android.synthetic.main.movie_detail_page_fragment.*
 
 class MovieDetailPage : Fragment() {
@@ -65,7 +64,6 @@ class MovieDetailPage : Fragment() {
             }
 
             val crewMembers = uiModel?.crewMembers ?: arrayListOf()
-
             carousel {
                 id("crew_members")
                     .numViewsToShowOnScreen(2.8f)
@@ -75,8 +73,30 @@ class MovieDetailPage : Fragment() {
                             .crew(crew)
                     }
             }
+
+            renderMovies("similar_movies", uiModel?.similarMovies ?: arrayListOf(), this)
+            renderMovies("recommended_movies", uiModel?.recommendedMovies ?: arrayListOf(), this)
         }
         viewModel.pageData.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
+    }
+
+    private fun renderMovies(
+        id: String,
+        movies: List<Movie>,
+        epoxyController: EpoxyController
+    ) {
+        epoxyController.carousel {
+            id(id)
+            numViewsToShowOnScreen(2.3f)
+            withModelsFrom(movies) { movie ->
+                MovieCellBindingModel_()
+                    .id(movie.id)
+                    .movie(movie)
+                    .onClick { _ ->
+
+                    }
+            }
+        }
     }
 
 }

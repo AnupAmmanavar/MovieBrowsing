@@ -25,4 +25,10 @@ interface MovieBrowsing {
   @GET("movie/{id}/credits?$API_KEY")
   suspend fun getCredits(@Path("id") id: Long): MovieCredits
 
+  @GET("movie/{id}/recommendations?$API_KEY")
+  suspend fun getMovieRecommendations(@Path("id") id: Long): PopularMovies
+
+  @GET("movie/{id}/similar?$API_KEY")
+  suspend fun getSimilarMovies(@Path("id") id: Long): PopularMovies
+
 }

@@ -18,6 +18,8 @@ class MovieDetailPageViewModel : ViewModel() {
     fun load(id: Long) {
         loadMovieDetails(id)
         loadCastAndCrew(id)
+        loadRecommendedMovies(id)
+        loadSimilarMovies(id)
     }
 
     private fun loadMovieDetails(id: Long) {
@@ -42,8 +44,23 @@ class MovieDetailPageViewModel : ViewModel() {
         }
     }
 
+    private fun loadRecommendedMovies(id: Long) {
+        viewModelScope.launch {
+            val recommendedMovies = repository.getRecommendedMovies(id).movies
+            updateState { it.copy(recommendedMovies = recommendedMovies) }
+
+        }
+    }
+
+    private fun loadSimilarMovies(id: Long) {
+        viewModelScope.launch {
+            val similarMovies = repository.getSimilarMovies(id).movies
+            updateState { it.copy(similarMovies = similarMovies) }
+        }
+    }
+
     private fun updateState(block: (MovieDetailPageUiModel) -> MovieDetailPageUiModel) {
-        val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null)
+        val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null, arrayListOf(), arrayListOf())
         pageData.postValue(block.invoke(uiModel))
     }
 }
@@ -52,5 +69,7 @@ class MovieDetailPageViewModel : ViewModel() {
 data class MovieDetailPageUiModel(
     val movie: Movie?,
     val crewMembers: List<Crew>?,
-    val castMembers: List<Cast>?
+    val castMembers: List<Cast>?,
+    val recommendedMovies: List<Movie>,
+    val similarMovies: List<Movie>
 )
