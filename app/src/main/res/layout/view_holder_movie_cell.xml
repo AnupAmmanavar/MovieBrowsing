@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="movie"
             type="com.kinley.moviebrowsing.models.Movie" />
     </data>
@@ -19,7 +23,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{onClick}">
 
 
             <ImageView

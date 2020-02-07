@@ -1,23 +1,21 @@
 package com.kinley.moviebrowsing.features.home
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.kinley.moviebrowsing.models.Movie
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomePageViewModel : ViewModel() {
+class HomePageViewModel : ViewModel(), LifecycleObserver {
 
-
-  var appData: MutableLiveData<MutableList<List<Movie>>> = MutableLiveData()
+  var pageData: MutableLiveData<MutableList<List<Movie>>> = MutableLiveData()
   private val repository = MovieBrowsingRemoteImpl()
 
 
+  @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
   fun load() {
-    appData.value = mutableListOf()
+    pageData.value = mutableListOf()
     viewModelScope.launch { setData(repository.getPopularMovies().movies) }
     viewModelScope.launch { setData(repository.getTopRatedMovies().movies) }
     viewModelScope.launch { setData(repository.getUpcomingMovies().movies) }
@@ -26,10 +24,10 @@ class HomePageViewModel : ViewModel() {
 
   private suspend fun setData(movieList: List<Movie>) {
     val list = withContext(Dispatchers.Default) {
-      val list = appData.value ?: mutableListOf()
+      val list = pageData.value ?: mutableListOf()
       list.add(movieList)
       list
     }
-    appData.postValue(list)
+    pageData.postValue(list)
   }
 }
