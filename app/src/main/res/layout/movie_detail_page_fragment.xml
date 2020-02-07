@@ -95,5 +95,14 @@
             app:layout_constraintStart_toStartOf="@+id/tv_runtime"
             app:layout_constraintTop_toBottomOf="@+id/tv_runtime" />
 
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_cast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_movie_overview" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

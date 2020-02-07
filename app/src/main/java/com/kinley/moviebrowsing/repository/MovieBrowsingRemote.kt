@@ -1,6 +1,7 @@
 package com.kinley.moviebrowsing.repository
 
 import com.kinley.moviebrowsing.models.Movie
+import com.kinley.moviebrowsing.models.MovieCredits
 import com.kinley.moviebrowsing.models.PopularMovies
 import com.kinley.moviebrowsing.setup.RetrofitServiceFactory
 
@@ -13,6 +14,8 @@ interface MovieBrowsingRemote {
   suspend fun getUpcomingMovies(): PopularMovies
 
   suspend fun getMovieDetails(id: Long): Movie
+
+  suspend fun getCredits(id: Long): MovieCredits
 }
 
 class MovieBrowsingRemoteImpl(
@@ -26,7 +29,7 @@ class MovieBrowsingRemoteImpl(
 
   override suspend fun getUpcomingMovies(): PopularMovies = service.getUpcomingMovies()
 
-  override suspend fun getMovieDetails(id: Long): Movie {
-    return service.getMovie(id)
-  }
+  override suspend fun getMovieDetails(id: Long): Movie = service.getMovie(id)
+
+  override suspend fun getCredits(id: Long): MovieCredits = service.getCredits(id)
 }
