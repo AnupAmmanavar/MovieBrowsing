@@ -3,7 +3,9 @@ package com.kinley.moviebrowsing
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,5 +16,10 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     vm.load()
+
+    vm.movies.observe(this, Observer {
+      count.text = "Size ${it.size}"
+    })
+
   }
 }
