@@ -17,8 +17,18 @@ class MainActivity : AppCompatActivity() {
 
     vm.load()
 
+    epoxy_rv.withModels {
+      val movies = vm.movies.value ?: arrayListOf()
+      movies.forEach {  movie ->
+        MovieCellBindingModel_()
+          .id(movie.id)
+          .movieName(movie.title)
+          .addTo(this)
+      }
+    }
+
     vm.movies.observe(this, Observer {
-      count.text = "Size ${it.size}"
+      epoxy_rv.requestModelBuild()
     })
 
   }

@@ -16,8 +16,8 @@ class HomePageViewModel : ViewModel() {
 
   fun load() {
     viewModelScope.launch {
-      movies.postValue(repository.getTopRatedMovies().movies)
-      Log.d("movies", movies.toString())
+      movies.postValue(repository.getPopularMovies().movies)
+      Log.d("movies", movies.value.toString())
     }
   }
 }

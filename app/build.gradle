@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -31,6 +36,10 @@ android {
         jvmTarget = "1.8"
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -39,6 +48,7 @@ dependencies {
     def dagger_version = "2.26"
     def gson_version = "2.8.6"
     def retrofit_version = "2.7.1"
+    def epoxy_version = "3.9.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -63,5 +73,10 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     implementation "com.google.code.gson:gson:$gson_version"
+
+    implementation "com.airbnb.android:epoxy:$epoxy_version"
+    kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
+    implementation "com.airbnb.android:epoxy-databinding:$epoxy_version"
+
 
 }
