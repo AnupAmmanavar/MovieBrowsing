@@ -1,27 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="movieName"
-            type="String" />
+            name="movie"
+            type="com.kinley.moviebrowsing.models.Movie" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_light_background"
+        app:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/tv_movie_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{movieName}"
-            tools:text="Movie name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:imageURL="@{movie.poster_path}"
+                tools:layout_height="420dp"
+                tools:layout_width="match_parent" />
+
+
+            <TextView
+                android:id="@+id/tv_movie_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{movie.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster"
+                tools:text="@string/test_movie_name" />
+
+            <TextView
+                android:id="@+id/tv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{`Rating ` + movie.vote_average}"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
+                tools:text="@string/test_movie_rating" />
+
+            <TextView
+                android:id="@+id/tv_vote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="@string/test_movie_votes"
+                android:text="@{movie.vote_count + ` votes`}"
+                app:layout_constraintEnd_toEndOf="@+id/tv_movie_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

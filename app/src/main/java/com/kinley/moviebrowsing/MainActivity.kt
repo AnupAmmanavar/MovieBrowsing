@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     epoxy_rv.withModels {
       val movies = vm.movies.value ?: arrayListOf()
-      movies.forEach {  movie ->
+      movies.forEach { movie ->
         MovieCellBindingModel_()
           .id(movie.id)
-          .movieName(movie.title)
+          .movie(movie)
           .addTo(this)
       }
     }
