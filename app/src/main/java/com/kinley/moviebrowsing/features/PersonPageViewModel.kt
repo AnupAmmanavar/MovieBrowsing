@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kinley.moviebrowsing.models.Cast
 import com.kinley.moviebrowsing.models.Person
+import com.kinley.moviebrowsing.models.PersonCast
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemote
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ class PersonPageViewModel : ViewModel() {
 
     private val repository: MovieBrowsingRemote = MovieBrowsingRemoteImpl()
 
-    val _pageDate: MutableLiveData<PersonPageUiModel> = MutableLiveData()
+    private val _pageDate: MutableLiveData<PersonPageUiModel> = MutableLiveData()
     val pageData : LiveData<PersonPageUiModel>
     get() {
         return _pageDate
@@ -34,8 +35,8 @@ class PersonPageViewModel : ViewModel() {
 
     private fun loadMovieCredits(id: Long) {
         viewModelScope.launch {
-            val castedList = repository.getMovieCreditsForPerson(id)
-            update { it.copy(castList = castedList.cast) }
+            val responseModel = repository.getMovieCreditsForPerson(id)
+            update { it.copy(castList = responseModel.personCast) }
         }
     }
 
@@ -47,5 +48,5 @@ class PersonPageViewModel : ViewModel() {
 
 data class PersonPageUiModel(
     val person: Person?,
-    val castList: List<Cast>
+    val castList: List<PersonCast>
 )

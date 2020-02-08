@@ -1,9 +1,6 @@
 package com.kinley.moviebrowsing.repository
 
-import com.kinley.moviebrowsing.models.Movie
-import com.kinley.moviebrowsing.models.MovieCredits
-import com.kinley.moviebrowsing.models.Person
-import com.kinley.moviebrowsing.models.PopularMovies
+import com.kinley.moviebrowsing.models.*
 import com.kinley.moviebrowsing.setup.RetrofitServiceFactory
 import retrofit2.http.Path
 
@@ -27,7 +24,7 @@ interface MovieBrowsingRemote {
 
   suspend fun getPersonDetails(id: Long): Person
 
-  suspend fun getMovieCreditsForPerson(id: Long): MovieCredits
+  suspend fun getMovieCreditsForPerson(id: Long): PersonCastResponseModel
 }
 
 class MovieBrowsingRemoteImpl(
@@ -53,5 +50,5 @@ class MovieBrowsingRemoteImpl(
 
   override suspend fun getPersonDetails(id: Long) = service.getPersonDetails(id)
 
-  override suspend fun getMovieCreditsForPerson(id: Long): MovieCredits = service.getMovieCreditsForPerson(id)
+  override suspend fun getMovieCreditsForPerson(id: Long) = service.getMovieCreditsForPerson(id)
 }
