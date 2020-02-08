@@ -7,6 +7,10 @@
         <variable
             name="cast"
             type="com.kinley.moviebrowsing.models.Cast" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -18,6 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="@{onClick}"
             tools:ignore="MissingDefaultResource">
 
             <ImageView

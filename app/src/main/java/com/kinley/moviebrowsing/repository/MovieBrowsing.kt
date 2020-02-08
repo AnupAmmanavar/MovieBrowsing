@@ -2,6 +2,7 @@ package com.kinley.moviebrowsing.repository
 
 import com.kinley.moviebrowsing.models.Movie
 import com.kinley.moviebrowsing.models.MovieCredits
+import com.kinley.moviebrowsing.models.Person
 import com.kinley.moviebrowsing.models.PopularMovies
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -33,5 +34,11 @@ interface MovieBrowsing {
 
   @GET("movie/{id}/similar?$API_KEY")
   suspend fun getSimilarMovies(@Path("id") id: Long): PopularMovies
+
+  @GET("person/{id}?$API_KEY")
+  suspend fun getPersonDetails(@Path("id") id: Long): Person
+
+  @GET("person/{id}/movie_credits?$API_KEY")
+  suspend fun getMovieCreditsForPerson(@Path("id") id: Long): MovieCredits
 
 }

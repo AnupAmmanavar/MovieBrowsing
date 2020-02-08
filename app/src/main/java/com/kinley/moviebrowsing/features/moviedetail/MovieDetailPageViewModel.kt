@@ -8,6 +8,7 @@ import com.kinley.moviebrowsing.models.Crew
 import com.kinley.moviebrowsing.models.Movie
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MovieDetailPageViewModel : ViewModel() {
 
@@ -63,8 +64,10 @@ class MovieDetailPageViewModel : ViewModel() {
      * @param block : This takes the lambda which updates the pageState
      */
     private fun updateState(block: (MovieDetailPageUiModel) -> MovieDetailPageUiModel) {
-        val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null, arrayListOf(), arrayListOf())
-        pageData.postValue(block.invoke(uiModel))
+        runBlocking {
+            val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null, arrayListOf(), arrayListOf())
+            pageData.postValue(block.invoke(uiModel))
+        }
     }
 }
 

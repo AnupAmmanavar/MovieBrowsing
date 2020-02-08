@@ -25,5 +25,17 @@
         <action
             android:id="@+id/action_movieDetailPage_self"
             app:destination="@id/movieDetailPage" />
+        <action
+            android:id="@+id/action_movieDetailPage_to_personPage"
+            app:destination="@id/personPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/personPage"
+        android:name="com.kinley.moviebrowsing.features.PersonPage"
+        android:label="persone_page_fragment"
+        tools:layout="@layout/persone_page_fragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
 </navigation>

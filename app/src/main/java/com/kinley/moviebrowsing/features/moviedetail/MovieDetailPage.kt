@@ -61,6 +61,9 @@ class MovieDetailPage : Fragment() {
                     CastViewBindingModel_()
                         .id(cast.id)
                         .cast(cast)
+                        .onClick { _ ->
+                            findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(cast.id as Long))
+                        }
                 }
             }
 
