@@ -1,10 +1,9 @@
-package com.kinley.moviebrowsing.features
+package com.kinley.moviebrowsing.features.person_detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kinley.moviebrowsing.models.Cast
 import com.kinley.moviebrowsing.models.Person
 import com.kinley.moviebrowsing.models.PersonCast
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemote
@@ -41,7 +40,10 @@ class PersonPageViewModel : ViewModel() {
     }
 
     fun update(block: (PersonPageUiModel) -> PersonPageUiModel) {
-        val uiModel = _pageDate.value ?: PersonPageUiModel(null, arrayListOf())
+        val uiModel = _pageDate.value ?: PersonPageUiModel(
+            null,
+            arrayListOf()
+        )
         _pageDate.postValue(block.invoke(uiModel))
     }
 }
