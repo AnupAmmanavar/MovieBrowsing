@@ -62,7 +62,7 @@ class MovieDetailPage : Fragment() {
                         .id(cast.id)
                         .cast(cast)
                         .onClick { _ ->
-                            findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(cast.id as Long))
+                            findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(cast.id))
                         }
                 }
             }
@@ -75,6 +75,9 @@ class MovieDetailPage : Fragment() {
                         CrewCellBindingModel_()
                             .id(crew.id)
                             .crew(crew)
+                            .onClick { _ ->
+                                findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(crew.id))
+                            }
                     }
             }
 
