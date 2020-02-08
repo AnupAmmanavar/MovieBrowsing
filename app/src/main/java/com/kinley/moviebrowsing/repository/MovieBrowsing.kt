@@ -19,6 +19,9 @@ interface MovieBrowsing {
   @GET("movie/upcoming?$API_KEY")
   suspend fun getUpcomingMovies(): PopularMovies
 
+  @GET("movie/now_playing?$API_KEY")
+  suspend fun getNowPlaying(): PopularMovies
+
   @GET("movie/{id}?$API_KEY")
   suspend fun getMovie(@Path("id") id: Long): Movie
 

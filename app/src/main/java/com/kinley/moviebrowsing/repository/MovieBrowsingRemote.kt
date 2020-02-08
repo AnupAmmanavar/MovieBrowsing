@@ -20,6 +20,9 @@ interface MovieBrowsingRemote {
   suspend fun getRecommendedMovies(id: Long): PopularMovies
 
   suspend fun getSimilarMovies(id: Long): PopularMovies
+
+  suspend fun getPlayingNow(): PopularMovies
+
 }
 
 class MovieBrowsingRemoteImpl(
@@ -40,4 +43,6 @@ class MovieBrowsingRemoteImpl(
   override suspend fun getRecommendedMovies(id: Long): PopularMovies = service.getMovieRecommendations(id)
 
   override suspend fun getSimilarMovies(id: Long): PopularMovies = service.getSimilarMovies(id)
+
+  override suspend fun getPlayingNow() = service.getNowPlaying()
 }

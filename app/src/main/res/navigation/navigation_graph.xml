@@ -22,5 +22,8 @@
         <argument
             android:name="movieId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_movieDetailPage_self"
+            app:destination="@id/movieDetailPage" />
     </fragment>
 </navigation>

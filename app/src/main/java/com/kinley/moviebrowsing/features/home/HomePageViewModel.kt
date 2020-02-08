@@ -19,6 +19,7 @@ class HomePageViewModel : ViewModel(), LifecycleObserver {
     viewModelScope.launch { setData(repository.getPopularMovies().movies) }
     viewModelScope.launch { setData(repository.getTopRatedMovies().movies) }
     viewModelScope.launch { setData(repository.getUpcomingMovies().movies) }
+    viewModelScope.launch { setData(repository.getPlayingNow().movies) }
 
   }
 
