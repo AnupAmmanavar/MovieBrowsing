@@ -1,7 +1,7 @@
-package com.kinley.moviebrowsing.setup
+package com.kinley.data.setup
 
 import com.google.gson.Gson
-import com.kinley.moviebrowsing.repository.MovieBrowsing
+import com.kinley.data.repository.MovieBrowsing
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

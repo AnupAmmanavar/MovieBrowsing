@@ -6,7 +6,7 @@
     <data>
         <variable
             name="person"
-            type="com.kinley.moviebrowsing.models.Person" />
+            type="com.kinley.data.models.Person" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

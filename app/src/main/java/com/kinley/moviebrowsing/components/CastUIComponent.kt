@@ -2,7 +2,7 @@ package com.kinley.moviebrowsing.components
 
 import com.airbnb.epoxy.EpoxyModel
 import com.kinley.moviebrowsing.CastViewBindingModel_
-import com.kinley.moviebrowsing.models.Cast
+import com.kinley.data.models.Cast
 
 class CastUIComponent(
     override val data: List<Cast>,

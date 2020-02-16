@@ -2,7 +2,7 @@ package com.kinley.moviebrowsing.components
 
 import com.airbnb.epoxy.EpoxyModel
 import com.kinley.moviebrowsing.CrewCellBindingModel_
-import com.kinley.moviebrowsing.models.Crew
+import com.kinley.data.models.Crew
 
 class CrewUIComponent(
     override val data: List<Crew>,

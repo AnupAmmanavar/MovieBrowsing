@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.models
+package com.kinley.data.models
 
 import com.google.gson.annotations.SerializedName
 

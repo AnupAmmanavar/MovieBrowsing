@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.carousel
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.MovieDelegate
-import com.kinley.moviebrowsing.models.Movie
+import com.kinley.data.models.Movie
 import kotlinx.android.synthetic.main.fragment_home_page.*
 
 class HomePageFragment : Fragment(), MovieDelegate {

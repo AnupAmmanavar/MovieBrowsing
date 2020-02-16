@@ -6,7 +6,7 @@
     <data>
         <variable
             name="cast"
-            type="com.kinley.moviebrowsing.models.PersonCast" />
+            type="com.kinley.data.models.PersonCast" />
 
         <variable
             name="onClick"

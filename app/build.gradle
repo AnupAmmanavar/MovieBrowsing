@@ -52,6 +52,8 @@ dependencies {
     def epoxy_version = "3.9.0"
     def glide_version = "4.11.0"
 
+    implementation project(":data")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'

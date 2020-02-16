@@ -2,8 +2,8 @@ package com.kinley.moviebrowsing.features.home
 
 import androidx.lifecycle.*
 import com.kinley.moviebrowsing.components.MovieListUIComponent
-import com.kinley.moviebrowsing.models.MoviesDataModel
-import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
+import com.kinley.data.models.MoviesDataModel
+import com.kinley.data.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

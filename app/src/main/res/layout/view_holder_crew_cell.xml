@@ -6,7 +6,7 @@
     <data>
         <variable
             name="crew"
-            type="com.kinley.moviebrowsing.models.Crew" />
+            type="com.kinley.data.models.Crew" />
 
         <variable
             name="onClick"

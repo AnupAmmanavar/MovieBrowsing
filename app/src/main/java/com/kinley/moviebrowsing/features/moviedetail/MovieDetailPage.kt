@@ -19,9 +19,9 @@ import com.kinley.moviebrowsing.components.CrewDelegate
 import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.components.MovieListUIComponent
 import com.kinley.moviebrowsing.databinding.MovieDetailPageFragmentBinding
-import com.kinley.moviebrowsing.models.Cast
-import com.kinley.moviebrowsing.models.Crew
-import com.kinley.moviebrowsing.models.Movie
+import com.kinley.data.models.Cast
+import com.kinley.data.models.Crew
+import com.kinley.data.models.Movie
 import kotlinx.android.synthetic.main.movie_detail_page_fragment.*
 
 class MovieDetailPage : Fragment(), CrewDelegate, MovieDelegate, CastDelegate {

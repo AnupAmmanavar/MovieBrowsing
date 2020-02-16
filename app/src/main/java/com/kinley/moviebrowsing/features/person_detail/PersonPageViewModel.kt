@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kinley.moviebrowsing.models.Person
-import com.kinley.moviebrowsing.models.PersonCast
-import com.kinley.moviebrowsing.repository.MovieBrowsingRemote
-import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
+import com.kinley.data.models.Person
+import com.kinley.data.models.PersonCast
+import com.kinley.data.repository.MovieBrowsingRemote
+import com.kinley.data.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.launch
 
 class PersonPageViewModel : ViewModel() {

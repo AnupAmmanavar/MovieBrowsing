@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.models
+package com.kinley.data.models
 
 data class MovieCredits(
     val cast: List<Cast>,

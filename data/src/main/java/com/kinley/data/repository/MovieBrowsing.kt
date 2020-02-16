@@ -1,6 +1,6 @@
-package com.kinley.moviebrowsing.repository
+package com.kinley.data.repository
 
-import com.kinley.moviebrowsing.models.*
+import com.kinley.data.models.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 

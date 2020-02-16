@@ -1,7 +1,7 @@
-package com.kinley.moviebrowsing.repository
+package com.kinley.data.repository
 
-import com.kinley.moviebrowsing.models.*
-import com.kinley.moviebrowsing.setup.RetrofitServiceFactory
+import com.kinley.data.models.*
+import com.kinley.data.setup.RetrofitServiceFactory
 
 interface MovieBrowsingRemote {
 

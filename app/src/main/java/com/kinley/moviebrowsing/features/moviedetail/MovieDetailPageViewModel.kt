@@ -7,7 +7,7 @@ import com.kinley.moviebrowsing.components.CastUIComponent
 import com.kinley.moviebrowsing.components.CrewUIComponent
 import com.kinley.moviebrowsing.components.MovieDetailUIComponent
 import com.kinley.moviebrowsing.components.MovieListUIComponent
-import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
+import com.kinley.data.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
