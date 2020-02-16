@@ -3,9 +3,10 @@ package com.kinley.moviebrowsing.features.moviedetail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kinley.moviebrowsing.models.Cast
-import com.kinley.moviebrowsing.models.Crew
-import com.kinley.moviebrowsing.models.Movie
+import com.kinley.moviebrowsing.components.CastUIComponent
+import com.kinley.moviebrowsing.components.CrewUIComponent
+import com.kinley.moviebrowsing.components.MovieDetailUIComponent
+import com.kinley.moviebrowsing.components.MovieListUIComponent
 import com.kinley.moviebrowsing.repository.MovieBrowsingRemoteImpl
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -26,7 +27,8 @@ class MovieDetailPageViewModel : ViewModel() {
     private fun loadMovieDetails(id: Long) {
         viewModelScope.launch {
             val _movie = repository.getMovieDetails(id)
-            updateState { it.copy(movie = _movie) }
+            val movieDetailUIComponent = MovieDetailUIComponent(_movie)
+            updateState { it.copy(movieDetailUIComponent = movieDetailUIComponent) }
         }
     }
 
@@ -36,10 +38,12 @@ class MovieDetailPageViewModel : ViewModel() {
             val castMembers = credits.cast.filter { it.profile_path != null }
             val crewMembers = credits.crew.filter { it.profile_path != null }
 
+
+
             updateState {
                 it.copy(
-                    castMembers = castMembers,
-                    crewMembers = crewMembers
+                    castUIComponent = CastUIComponent(castMembers),
+                    crewUIComponent = CrewUIComponent(crewMembers)
                 )
             }
         }
@@ -48,7 +52,7 @@ class MovieDetailPageViewModel : ViewModel() {
     private fun loadRecommendedMovies(id: Long) {
         viewModelScope.launch {
             val recommendedMovies = repository.getRecommendedMovies(id).movies
-            updateState { it.copy(recommendedMovies = recommendedMovies) }
+            updateState { it.copy(recommendedMoviesListUIComponent = MovieListUIComponent(recommendedMovies)) }
 
         }
     }
@@ -56,7 +60,7 @@ class MovieDetailPageViewModel : ViewModel() {
     private fun loadSimilarMovies(id: Long) {
         viewModelScope.launch {
             val similarMovies = repository.getSimilarMovies(id).movies
-            updateState { it.copy(similarMovies = similarMovies) }
+            updateState { it.copy(similarMoviesListUIComponent = MovieListUIComponent(similarMovies)) }
         }
     }
 
@@ -65,7 +69,13 @@ class MovieDetailPageViewModel : ViewModel() {
      */
     private fun updateState(block: (MovieDetailPageUiModel) -> MovieDetailPageUiModel) {
         runBlocking {
-            val uiModel = pageData.value ?: MovieDetailPageUiModel(null, null, null, arrayListOf(), arrayListOf())
+            val uiModel = pageData.value ?: MovieDetailPageUiModel(
+                movieDetailUIComponent = null,
+                crewUIComponent = null,
+                castUIComponent = null,
+                recommendedMoviesListUIComponent = null,
+                similarMoviesListUIComponent = null
+            )
             pageData.postValue(block.invoke(uiModel))
         }
     }
@@ -73,9 +83,9 @@ class MovieDetailPageViewModel : ViewModel() {
 
 
 data class MovieDetailPageUiModel(
-    val movie: Movie?,
-    val crewMembers: List<Crew>?,
-    val castMembers: List<Cast>?,
-    val recommendedMovies: List<Movie>,
-    val similarMovies: List<Movie>
+    val movieDetailUIComponent: MovieDetailUIComponent?,
+    val crewUIComponent: CrewUIComponent?,
+    val castUIComponent: CastUIComponent?,
+    val recommendedMoviesListUIComponent: MovieListUIComponent?,
+    val similarMoviesListUIComponent: MovieListUIComponent?
 )

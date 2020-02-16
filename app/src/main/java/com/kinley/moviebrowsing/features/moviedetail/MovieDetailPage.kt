@@ -13,13 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.carousel
-import com.kinley.moviebrowsing.*
+import com.kinley.moviebrowsing.R
+import com.kinley.moviebrowsing.components.CastDelegate
+import com.kinley.moviebrowsing.components.CrewDelegate
+import com.kinley.moviebrowsing.components.MovieDelegate
+import com.kinley.moviebrowsing.components.MovieListUIComponent
 import com.kinley.moviebrowsing.databinding.MovieDetailPageFragmentBinding
-import com.kinley.moviebrowsing.epoxy.withModelsFrom
+import com.kinley.moviebrowsing.models.Cast
+import com.kinley.moviebrowsing.models.Crew
 import com.kinley.moviebrowsing.models.Movie
 import kotlinx.android.synthetic.main.movie_detail_page_fragment.*
 
-class MovieDetailPage : Fragment() {
+class MovieDetailPage : Fragment(), CrewDelegate, MovieDelegate, CastDelegate {
 
     private lateinit var v: MovieDetailPageFragmentBinding
 
@@ -45,65 +50,56 @@ class MovieDetailPage : Fragment() {
 
             val uiModel = viewModel.pageData.value
 
-            val movie = uiModel?.movie
-            if (movie != null) {
-                MovieDetailBindingModel_()
-                    .id(movie.id)
-                    .movie(movie)
-                    .addTo(this)
+            val movieDetailUIComponent = uiModel?.movieDetailUIComponent
+            movieDetailUIComponent?.render(this@MovieDetailPage)?.forEach {
+                it.addTo(this)
             }
 
-            val castMembers = uiModel?.castMembers ?: arrayListOf()
+            val castUIComponent =
+                uiModel?.castUIComponent?.render(this@MovieDetailPage) ?: arrayListOf()
             carousel {
                 id("castMembers")
                 numViewsToShowOnScreen(2.8f)
-                withModelsFrom(castMembers) { cast ->
-                    CastViewBindingModel_()
-                        .id(cast.id)
-                        .cast(cast)
-                        .onClick { _ ->
-                            findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(cast.id))
-                        }
-                }
+                models(castUIComponent)
             }
 
-            val crewMembers = uiModel?.crewMembers ?: arrayListOf()
+            val crewUIComponent =
+                uiModel?.crewUIComponent?.render(this@MovieDetailPage) ?: arrayListOf()
             carousel {
                 id("crew_members")
                     .numViewsToShowOnScreen(2.8f)
-                    .withModelsFrom(crewMembers) { crew ->
-                        CrewCellBindingModel_()
-                            .id(crew.id)
-                            .crew(crew)
-                            .onClick { _ ->
-                                findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(crew.id))
-                            }
-                    }
+                    .models(crewUIComponent)
             }
 
-            renderMovies("similar_movies", uiModel?.similarMovies ?: arrayListOf(), this)
-            renderMovies("recommended_movies", uiModel?.recommendedMovies ?: arrayListOf(), this)
+            renderMovies("similar_movies", uiModel?.similarMoviesListUIComponent, this)
+            renderMovies("recommended_movies", uiModel?.recommendedMoviesListUIComponent, this)
         }
         viewModel.pageData.observe(viewLifecycleOwner, Observer { epoxy.requestModelBuild() })
     }
 
     private fun renderMovies(
         id: String,
-        movies: List<Movie>,
+        movieListUIComponent: MovieListUIComponent?,
         epoxyController: EpoxyController
     ) {
+        val movieModels = movieListUIComponent?.render(this@MovieDetailPage) ?: arrayListOf()
         epoxyController.carousel {
             id(id)
             numViewsToShowOnScreen(2.3f)
-            withModelsFrom(movies) { movie ->
-                MovieCellBindingModel_()
-                    .id(movie.id)
-                    .movie(movie)
-                    .onClick { _ ->
-                        findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageSelf(movie.id))
-                    }
-            }
+            models(movieModels)
         }
+    }
+
+    override fun onCrewClick(crew: Crew) {
+        findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(crew.id))
+    }
+
+    override fun onCastClick(cast: Cast) {
+        findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageToPersonPage(cast.id))
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        findNavController().navigate(MovieDetailPageDirections.actionMovieDetailPageSelf(movie.id))
     }
 
 }
