@@ -2,25 +2,24 @@ package com.kinley.moviebrowsing.repository
 
 import com.kinley.moviebrowsing.models.*
 import com.kinley.moviebrowsing.setup.RetrofitServiceFactory
-import retrofit2.http.Path
 
 interface MovieBrowsingRemote {
 
-  suspend fun getPopularMovies(): PopularMovies
+  suspend fun getPopularMovies(): MoviesDataModel
 
-  suspend fun getTopRatedMovies(): PopularMovies
+  suspend fun getTopRatedMovies(): MoviesDataModel
 
-  suspend fun getUpcomingMovies(): PopularMovies
+  suspend fun getUpcomingMovies(): MoviesDataModel
 
   suspend fun getMovieDetails(id: Long): Movie
 
   suspend fun getCredits(id: Long): MovieCredits
 
-  suspend fun getRecommendedMovies(id: Long): PopularMovies
+  suspend fun getRecommendedMovies(id: Long): MoviesDataModel
 
-  suspend fun getSimilarMovies(id: Long): PopularMovies
+  suspend fun getSimilarMovies(id: Long): MoviesDataModel
 
-  suspend fun getPlayingNow(): PopularMovies
+  suspend fun getPlayingNow(): MoviesDataModel
 
   suspend fun getPersonDetails(id: Long): Person
 
@@ -32,19 +31,19 @@ class MovieBrowsingRemoteImpl(
 ) : MovieBrowsingRemote {
   private val service = RetrofitServiceFactory.generateService()
 
-  override suspend fun getPopularMovies(): PopularMovies = service.getPopularMovies()
+  override suspend fun getPopularMovies(): MoviesDataModel = service.getPopularMovies()
 
-  override suspend fun getTopRatedMovies(): PopularMovies = service.getTopRatedMovies()
+  override suspend fun getTopRatedMovies(): MoviesDataModel = service.getTopRatedMovies()
 
-  override suspend fun getUpcomingMovies(): PopularMovies = service.getUpcomingMovies()
+  override suspend fun getUpcomingMovies(): MoviesDataModel = service.getUpcomingMovies()
 
   override suspend fun getMovieDetails(id: Long): Movie = service.getMovie(id)
 
   override suspend fun getCredits(id: Long): MovieCredits = service.getCredits(id)
 
-  override suspend fun getRecommendedMovies(id: Long): PopularMovies = service.getMovieRecommendations(id)
+  override suspend fun getRecommendedMovies(id: Long): MoviesDataModel = service.getMovieRecommendations(id)
 
-  override suspend fun getSimilarMovies(id: Long): PopularMovies = service.getSimilarMovies(id)
+  override suspend fun getSimilarMovies(id: Long): MoviesDataModel = service.getSimilarMovies(id)
 
   override suspend fun getPlayingNow() = service.getNowPlaying()
 

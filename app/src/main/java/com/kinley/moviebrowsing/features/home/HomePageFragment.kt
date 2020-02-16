@@ -9,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.carousel
-import com.kinley.moviebrowsing.MovieCellBindingModel_
 import com.kinley.moviebrowsing.R
-import com.kinley.moviebrowsing.epoxy.withModelsFrom
+import com.kinley.moviebrowsing.components.MovieDelegate
+import com.kinley.moviebrowsing.models.Movie
 import kotlinx.android.synthetic.main.fragment_home_page.*
 
-class HomePageFragment : Fragment() {
+class HomePageFragment : Fragment(), MovieDelegate {
 
     private val vm: HomePageViewModel by viewModels()
 
@@ -36,21 +36,13 @@ class HomePageFragment : Fragment() {
         lifecycle.addObserver(vm)
 
         epoxy_rv.withModels {
-            val contents = vm.pageData.value ?: arrayListOf()
+            val movieListUIComponents = vm.pageData.value?.movieListUIComponents ?: arrayListOf()
 
-            contents.forEachIndexed { index, movies ->
-
+            movieListUIComponents.forEachIndexed { index, movieListUIComponent ->
                 carousel {
                     id(index)
                     numViewsToShowOnScreen(2.3f)
-                    withModelsFrom(movies) { movie ->
-                        MovieCellBindingModel_()
-                            .id(movie.id)
-                            .movie(movie)
-                            .onClick { _ ->
-                                navigator.toMovieDetailPage(movie.id)
-                            }
-                    }
+                    models(movieListUIComponent.render(this@HomePageFragment))
                 }
             }
 
@@ -60,6 +52,10 @@ class HomePageFragment : Fragment() {
             epoxy_rv.requestModelBuild()
         })
 
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        navigator.toMovieDetailPage(movie.id)
     }
 }
 

@@ -2,7 +2,7 @@ package com.kinley.moviebrowsing.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularMovies(
+data class MoviesDataModel(
   val page: Int,
   @SerializedName("total_results")
   val totalResults: Int,
