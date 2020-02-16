@@ -5,8 +5,9 @@ import com.kinley.moviebrowsing.CrewCellBindingModel_
 import com.kinley.moviebrowsing.models.Crew
 
 class CrewUIComponent(
-    val crewList: List<Crew>
-) : UIComponent<CrewDelegate> {
+    override val data: List<Crew>,
+    private val crewList: List<Crew> = data
+) : UIComponent<List<Crew>, CrewDelegate> {
 
     override fun render(delegate: CrewDelegate): List<EpoxyModel<*>> {
         val crewModels: ArrayList<CrewCellBindingModel_> = arrayListOf()

@@ -5,8 +5,9 @@ import com.kinley.moviebrowsing.MovieDetailBindingModel_
 import com.kinley.moviebrowsing.models.Movie
 
 class MovieDetailUIComponent(
-    val movie: Movie
-) : UIComponent<MovieDelegate> {
+    override val data: Movie,
+    private val movie: Movie = data
+) : UIComponent<Movie, MovieDelegate> {
 
     override fun render(delegate: MovieDelegate): List<EpoxyModel<*>> {
         return arrayListOf(

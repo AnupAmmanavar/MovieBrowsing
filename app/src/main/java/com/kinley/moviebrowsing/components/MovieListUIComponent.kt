@@ -5,8 +5,9 @@ import com.kinley.moviebrowsing.MovieCellBindingModel_
 import com.kinley.moviebrowsing.models.Movie
 
 class MovieListUIComponent(
-    val movieList: List<Movie>
-) : UIComponent<MovieDelegate> {
+    override val data: List<Movie>,
+    private val movieList: List<Movie> = data
+) : UIComponent<List<Movie>, MovieDelegate> {
 
     override fun render(delegate: MovieDelegate): List<EpoxyModel<*>> {
         val movieModels: ArrayList<MovieCellBindingModel_> = arrayListOf()

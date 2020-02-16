@@ -5,8 +5,9 @@ import com.kinley.moviebrowsing.CastViewBindingModel_
 import com.kinley.moviebrowsing.models.Cast
 
 class CastUIComponent(
-    val castList: List<Cast>
-) : UIComponent<CastDelegate> {
+    override val data: List<Cast>,
+    private val castList: List<Cast> = data
+) : UIComponent<List<Cast>, CastDelegate> {
 
     override fun render(delegate: CastDelegate): List<EpoxyModel<*>> {
 
