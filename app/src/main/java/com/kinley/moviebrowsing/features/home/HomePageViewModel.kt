@@ -1,12 +1,11 @@
 package com.kinley.moviebrowsing.features.home
 
+import androidx.compose.Model
 import androidx.lifecycle.*
-import com.kinley.moviebrowsing.components.MovieListUIComponent
 import com.kinley.data.models.MoviesDataModel
 import com.kinley.data.repository.MovieBrowsingRemoteImpl
-import kotlinx.coroutines.Dispatchers
+import com.kinley.moviebrowsing.components.MovieListUIComponent
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomePageViewModel : ViewModel(), LifecycleObserver {
 
@@ -30,8 +29,8 @@ class HomePageViewModel : ViewModel(), LifecycleObserver {
         }
     }
 
-    private suspend fun addMoviesList(movieListUIComponent: MovieListUIComponent) {
-        val updatedMovieListUIComponents = withContext(Dispatchers.Default) {
+    private fun addMoviesList(movieListUIComponent: MovieListUIComponent) {
+        val updatedMovieListUIComponents = run {
             val movieListUIComponents =
                 pageData.value?.movieListUIComponents ?: arrayListOf()
 
@@ -42,6 +41,7 @@ class HomePageViewModel : ViewModel(), LifecycleObserver {
     }
 }
 
+@Model
 data class HomePageUIModel(
     val movieListUIComponents: ArrayList<MovieListUIComponent> = arrayListOf()
 )

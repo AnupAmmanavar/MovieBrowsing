@@ -21,4 +21,8 @@ data class Crew(
     val job: String,
     val name: String,
     val profile_path: String?
-)
+) {
+    companion object {
+        val testData = Crew("department", 12L, job = "JobField", name = "nameField", profile_path = "")
+    }
+}

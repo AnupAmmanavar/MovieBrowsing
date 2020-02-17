@@ -36,7 +36,33 @@ data class Movie(
   val original_language: String,
 
   val genre_ids: List<Int>
-)
+) {
+  companion object {
+    val testData = Movie(
+      adult = false,
+      backdrop_path = null,
+      budget = 100L,
+      genre_ids = arrayListOf(),
+      genres = arrayListOf(),
+      id = 12L,
+      original_language = "Hindi",
+      overview = "Overview of the movie",
+      popularity = 0.5,
+      poster_path = null,
+      production_companies = null,
+      production_countries = null,
+      release_date = "12-10-2012",
+      revenue = 12L,
+      runtime = 132,
+      spoken_languages = arrayListOf(),
+      tagline = "Wait till the end",
+      title = "Why wait longer???",
+      vote_average = 12.3,
+      vote_count = 1321
+    )
+  }
+}
+
 
 data class Genre(
   val id: Long,
