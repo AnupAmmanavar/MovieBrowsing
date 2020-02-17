@@ -30,9 +30,7 @@ fun MovieView(movie: Movie) {
         ) {
 
             Column(
-                modifier = LayoutPadding(
-                    5.dp
-                )
+                modifier = LayoutPadding(5.dp)
             ) {
                 Text(
                     movie.title,
