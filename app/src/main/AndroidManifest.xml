@@ -15,14 +15,16 @@
             android:name=".jetcompose.JetPackComposeActivity"
             android:label="@string/title_activity_jet_pack_compose"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".jetcompose.MovieDetailActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
-
         </activity>
     </application>
 

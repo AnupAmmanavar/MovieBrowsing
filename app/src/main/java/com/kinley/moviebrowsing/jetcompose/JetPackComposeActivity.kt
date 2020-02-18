@@ -1,5 +1,6 @@
 package com.kinley.moviebrowsing.jetcompose
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,8 @@ class JetPackComposeActivity : AppCompatActivity() {
         setContent {
             HomePage(vm.pageData)
         }
+
+      startActivity(Intent(this, MovieDetailActivity::class.java))
     }
 }
 
