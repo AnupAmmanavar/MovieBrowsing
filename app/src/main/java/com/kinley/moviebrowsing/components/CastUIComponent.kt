@@ -1,10 +1,11 @@
 package com.kinley.moviebrowsing.components
 
-import androidx.compose.Composable
 import com.airbnb.epoxy.EpoxyModel
 import com.kinley.data.models.Cast
 import com.kinley.moviebrowsing.CastViewBindingModel_
+import com.kinley.moviebrowsing.jetcompose.uicomponents.ComposableView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.HCastView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
 
 class CastUIComponent(
     override val data: List<Cast>,
@@ -32,21 +33,6 @@ class CastUIComponent(
         HCastView(castListUIComponent = this, delegate = delegate)
     }
 
-}
-
-interface JetView {
-    @Composable
-    fun composableView(delegate: CastDelegate): ComposableView
-}
-
-typealias ComposableView = @Composable() () -> Unit
-
-/**
- * This provides a clear readable name
- */
-@Composable
-fun ComposableView?.render() {
-    this?.invoke()
 }
 
 interface CastDelegate : UIDelegate {

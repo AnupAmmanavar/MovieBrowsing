@@ -16,11 +16,11 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.unit.dp
 import com.kinley.data.models.Cast
 import com.kinley.moviebrowsing.components.CastDelegate
-import com.kinley.moviebrowsing.components.render
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
 import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 
 class MovieDetailActivity : AppCompatActivity(), CastDelegate {
 
