@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose
+package com.kinley.moviebrowsing.jetcompose.screens
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,7 @@ import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
+import com.kinley.moviebrowsing.jetcompose.observe
 import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieView
 
@@ -49,7 +50,8 @@ class JetPackComposeActivity : AppCompatActivity() {
 @Composable
 fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>) {
 
-    val homePageUIModel = observe(data = homePageUIModelLiveData)
+    val homePageUIModel =
+        observe(data = homePageUIModelLiveData)
     VerticalScroller {
         Column(modifier = LayoutPadding(4.dp)) {
             homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->

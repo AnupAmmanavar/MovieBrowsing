@@ -15,7 +15,7 @@ import androidx.ui.unit.dp
 import com.kinley.data.models.Crew
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.CrewUIComponent
-import com.kinley.moviebrowsing.jetcompose.HStack
+import com.kinley.moviebrowsing.jetcompose.screens.HStack
 
 @Composable
 fun CrewView(crew: Crew) {

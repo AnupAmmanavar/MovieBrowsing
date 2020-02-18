@@ -5,7 +5,7 @@ import androidx.ui.layout.LayoutSize
 import androidx.ui.layout.Spacer
 import androidx.ui.unit.dp
 import com.kinley.moviebrowsing.components.MovieListUIComponent
-import com.kinley.moviebrowsing.jetcompose.HStack
+import com.kinley.moviebrowsing.jetcompose.screens.HStack
 
 @Composable
 fun MovieListView(movieListUIComponent: MovieListUIComponent) {

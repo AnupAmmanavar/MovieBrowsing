@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose
+package com.kinley.moviebrowsing.jetcompose.screens
 
 import android.os.Bundle
 import android.widget.Toast
@@ -18,6 +18,7 @@ import com.kinley.data.models.Cast
 import com.kinley.moviebrowsing.components.CastDelegate
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
+import com.kinley.moviebrowsing.jetcompose.observe
 import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.render
