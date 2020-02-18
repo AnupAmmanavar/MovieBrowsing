@@ -1,51 +1,66 @@
 package com.kinley.moviebrowsing.jetcompose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.lifecycle.LiveData
-import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.HorizontalScroller
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.Row
 import androidx.ui.material.MaterialTheme
 import androidx.ui.unit.dp
+import com.kinley.data.models.Cast
+import com.kinley.moviebrowsing.components.CastDelegate
+import com.kinley.moviebrowsing.components.render
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
-import com.kinley.moviebrowsing.jetcompose.uicomponents.HCastView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
 
-class MovieDetailActivity : AppCompatActivity() {
+class MovieDetailActivity : AppCompatActivity(), CastDelegate {
 
-  private val vm: MovieDetailPageViewModel by viewModels()
+    private val vm: MovieDetailPageViewModel by viewModels()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    vm.load(3870L)
-    setContent {
-      MaterialTheme {
-        MovieDetailPageView(vm.pageData)
-      }
+        vm.load(3870L)
+        setContent {
+            MaterialTheme {
+                MovieDetailPageView(vm.pageData, this)
+            }
+        }
     }
-  }
+
+    override fun onCastClick(cast: Cast) {
+        Toast.makeText(this, cast.name, Toast.LENGTH_SHORT).show()
+    }
 }
 
 @Composable
-fun MovieDetailPageView(data: LiveData<MovieDetailPageUiModel>) {
-  val pageUiModel = observe(data = data)
+fun MovieDetailPageView(data: LiveData<MovieDetailPageUiModel>, delegate: CastDelegate) {
+    val pageUiModel = observe(data = data)
 
-  VerticalScroller {
-    Column(modifier = LayoutPadding(4.dp)) {
+    VStack {
+        pageUiModel?.castUIComponent?.composableView(delegate = delegate).render()
+        pageUiModel?.crewUIComponent?.let { HCrewView(crewListUIComponent = it) }
 
-      pageUiModel?.castUIComponent?.let { HCastView(castListUIComponent = it) }
-      pageUiModel?.crewUIComponent?.let { HCrewView(crewListUIComponent = it) }
-
-      pageUiModel?.similarMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
-      pageUiModel?.recommendedMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
+        pageUiModel?.similarMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
+        pageUiModel?.recommendedMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
     }
-  }
+}
+
+@Composable
+fun VStack(child: @Composable() () -> Unit) {
+    VerticalScroller { Column(modifier = LayoutPadding(4.dp)) { child() } }
+}
+
+@Composable
+fun HStack(child: @Composable() () -> Unit) {
+    HorizontalScroller { Row(modifier = LayoutPadding(4.dp)) { child() } }
 }
