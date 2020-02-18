@@ -18,7 +18,7 @@ fun MovieView(movie: Movie) {
   val typography = MaterialTheme.typography()
     Card(
         shape = RoundedCornerShape(
-            4.dp
+            14.dp
         )
     ) {
 
