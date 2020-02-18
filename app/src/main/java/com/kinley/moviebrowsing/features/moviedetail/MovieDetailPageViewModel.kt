@@ -9,7 +9,6 @@ import com.kinley.moviebrowsing.components.CastUIComponent
 import com.kinley.moviebrowsing.components.CrewUIComponent
 import com.kinley.moviebrowsing.components.MovieDetailUIComponent
 import com.kinley.moviebrowsing.components.MovieListUIComponent
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MovieDetailPageViewModel : ViewModel() {
@@ -25,11 +24,8 @@ class MovieDetailPageViewModel : ViewModel() {
   fun load(id: Long) {
     viewModelScope.launch {
       loadMovieDetails(id)
-      delay(2000)
       loadRecommendedMovies(id)
-      delay(2000)
       loadSimilarMovies(id)
-      delay(2000)
       loadCastAndCrew(id)
     }
   }
@@ -103,9 +99,10 @@ class MovieDetailPageViewModel : ViewModel() {
     )
 
   private fun setUIData(movieDetailPageUiModel: MovieDetailPageUiModel) {
-    _pageData.postValue(movieDetailPageUiModel)
+    _pageData.value = movieDetailPageUiModel
   }
 }
+
 
 
 data class MovieDetailPageUiModel(
