@@ -16,13 +16,14 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.unit.dp
 import com.kinley.data.models.Cast
 import com.kinley.data.models.Crew
+import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.components.CastDelegate
 import com.kinley.moviebrowsing.components.CrewDelegate
+import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.HMovieListView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 
 class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
@@ -45,7 +46,11 @@ class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
     }
 
     override fun onCrewClick(crew: Crew) {
-        Toast.makeText(this, "Crew = {crew.name}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Crew = ${crew.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        Toast.makeText(this, "Movie = ${movie.title}", Toast.LENGTH_SHORT).show()
     }
 }
 
@@ -54,15 +59,18 @@ fun MovieDetailPageView(data: LiveData<MovieDetailPageUiModel>, delegate: Compos
     val pageUiModel = observe(data = data)
 
     VStack {
-        pageUiModel?.castUIComponent?.composableView(delegate = delegate).render()
-        pageUiModel?.crewUIComponent?.composableView(delegate = delegate).render()
 
-        pageUiModel?.similarMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
-        pageUiModel?.recommendedMoviesListUIComponent?.let { MovieListView(movieListUIComponent = it) }
+        pageUiModel?.movieDetailUIComponent?.composableView(delegate).render()
+
+        pageUiModel?.castUIComponent?.composableView(delegate).render()
+        pageUiModel?.crewUIComponent?.composableView(delegate).render()
+
+        pageUiModel?.similarMoviesListUIComponent?.composableView(delegate).render()
+        pageUiModel?.recommendedMoviesListUIComponent?.composableView(delegate).render()
     }
 }
 
-interface CompositDelegate : CastDelegate, CrewDelegate
+interface CompositDelegate : CastDelegate, CrewDelegate, MovieDelegate
 
 @Composable
 fun VStack(child: @Composable() () -> Unit) {

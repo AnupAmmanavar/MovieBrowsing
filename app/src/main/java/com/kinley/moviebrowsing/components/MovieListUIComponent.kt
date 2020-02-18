@@ -3,6 +3,8 @@ package com.kinley.moviebrowsing.components
 import com.airbnb.epoxy.EpoxyModel
 import com.kinley.moviebrowsing.MovieCellBindingModel_
 import com.kinley.data.models.Movie
+import com.kinley.moviebrowsing.jetcompose.uicomponents.ComposableView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.HMovieListView
 
 class MovieListUIComponent(
     override val data: List<Movie>,
@@ -23,5 +25,9 @@ class MovieListUIComponent(
             )
         }
         return movieModels
+    }
+
+    override fun composableView(delegate: MovieDelegate): ComposableView = {
+        HMovieListView(movieListUIComponent = this, delegate = delegate)
     }
 }

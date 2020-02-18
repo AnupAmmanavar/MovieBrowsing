@@ -11,17 +11,15 @@ import androidx.ui.core.setContent
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
-import androidx.ui.material.MaterialTheme
-import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
+import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieListView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.HMovieListView
 
-class JetPackComposeActivity : AppCompatActivity() {
+class JetPackComposeActivity : AppCompatActivity(), MovieDelegate {
 
 
     private val vm: HomePageViewModel by viewModels()
@@ -40,22 +38,26 @@ class JetPackComposeActivity : AppCompatActivity() {
         })
 
         setContent {
-            HomePage(vm.pageData)
+            HomePage(vm.pageData, this)
         }
 
       startActivity(Intent(this, MovieDetailActivity::class.java))
     }
+
+    override fun onMovieClick(movie: Movie) {
+
+    }
 }
 
 @Composable
-fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>) {
+fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>, movieDelegate: MovieDelegate) {
 
     val homePageUIModel =
         observe(data = homePageUIModelLiveData)
     VerticalScroller {
         Column(modifier = LayoutPadding(4.dp)) {
             homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
-                MovieListView(movieListUIComponent)
+                HMovieListView(movieListUIComponent, movieDelegate)
             }
         }
 
@@ -65,10 +67,11 @@ fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>) {
 
 }
 
+/*
 @Preview
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
         MovieView(movie = Movie.testData)
     }
-}
+}*/

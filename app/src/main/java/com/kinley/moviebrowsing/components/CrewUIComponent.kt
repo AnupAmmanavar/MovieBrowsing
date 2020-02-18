@@ -1,16 +1,15 @@
 package com.kinley.moviebrowsing.components
 
 import com.airbnb.epoxy.EpoxyModel
-import com.kinley.moviebrowsing.CrewCellBindingModel_
 import com.kinley.data.models.Crew
+import com.kinley.moviebrowsing.CrewCellBindingModel_
 import com.kinley.moviebrowsing.jetcompose.uicomponents.ComposableView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
 
 class CrewUIComponent(
     override val data: List<Crew>,
     private val crewList: List<Crew> = data
-) : UIComponent<List<Crew>, CrewDelegate>, JetView<CrewDelegate> {
+) : UIComponent<List<Crew>, CrewDelegate> {
 
     override fun render(delegate: CrewDelegate): List<EpoxyModel<*>> {
         val crewModels: ArrayList<CrewCellBindingModel_> = arrayListOf()

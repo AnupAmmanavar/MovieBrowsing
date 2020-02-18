@@ -2,6 +2,7 @@ package com.kinley.moviebrowsing.jetcompose.uicomponents
 
 import androidx.compose.Composable
 import androidx.ui.core.Text
+import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
@@ -12,32 +13,38 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
+import com.kinley.moviebrowsing.components.MovieDelegate
 
 @Composable
-fun MovieView(movie: Movie) {
-  val typography = MaterialTheme.typography()
-    Card(
-        shape = RoundedCornerShape(
-            14.dp
-        )
-    ) {
+fun MovieView(movie: Movie, delegate: MovieDelegate) {
+    val typography = MaterialTheme.typography()
+    Clickable(onClick = {
+        delegate.onMovieClick(movie)
+    }) {
 
-        Container(
-            modifier = LayoutSize(
-                280.dp,
-                280.dp
+        Card(
+            shape = RoundedCornerShape(
+                14.dp
             )
         ) {
 
-            Column(
-                modifier = LayoutPadding(5.dp)
-            ) {
-                Text(
-                    movie.title,
-                    style = typography.h4
+            Container(
+                modifier = LayoutSize(
+                    280.dp,
+                    280.dp
                 )
-                Text(movie.overview ?: "")
-                Divider()
+            ) {
+
+                Column(
+                    modifier = LayoutPadding(5.dp)
+                ) {
+                    Text(
+                        movie.title,
+                        style = typography.h4
+                    )
+                    Text(movie.overview ?: "")
+                    Divider()
+                }
             }
         }
     }
