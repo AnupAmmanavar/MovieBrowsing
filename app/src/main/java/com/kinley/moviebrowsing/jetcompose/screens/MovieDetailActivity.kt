@@ -23,7 +23,6 @@ import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.HMovieListView
 import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 
 class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
@@ -60,13 +59,9 @@ fun MovieDetailPageView(data: LiveData<MovieDetailPageUiModel>, delegate: Compos
 
     VStack {
 
-        pageUiModel?.movieDetailUIComponent?.composableView(delegate).render()
-
-        pageUiModel?.castUIComponent?.composableView(delegate).render()
-        pageUiModel?.crewUIComponent?.composableView(delegate).render()
-
-        pageUiModel?.similarMoviesListUIComponent?.composableView(delegate).render()
-        pageUiModel?.recommendedMoviesListUIComponent?.composableView(delegate).render()
+        pageUiModel?.components()?.forEach {
+            it.composableView(delegate = delegate).render()
+        }
     }
 }
 
