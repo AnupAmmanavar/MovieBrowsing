@@ -10,7 +10,7 @@ import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
 class CastUIComponent(
     override val data: List<Cast>,
     private val castList: List<Cast> = data
-) : UIComponent<List<Cast>, CastDelegate>, JetView {
+) : UIComponent<List<Cast>, CastDelegate>, JetView<CastDelegate> {
 
     override fun render(delegate: CastDelegate): List<EpoxyModel<*>> {
 
