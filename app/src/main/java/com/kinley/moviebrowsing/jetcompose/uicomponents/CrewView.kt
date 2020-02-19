@@ -15,7 +15,7 @@ import com.kinley.data.models.Crew
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.CrewDelegate
 import com.kinley.moviebrowsing.components.CrewUIComponent
-import com.kinley.moviebrowsing.jetcompose.screens.HStack
+import com.kinley.moviebrowsing.jetcompose.HStack
 
 @Composable
 fun CrewView(crew: Crew, delegate: CrewDelegate) {

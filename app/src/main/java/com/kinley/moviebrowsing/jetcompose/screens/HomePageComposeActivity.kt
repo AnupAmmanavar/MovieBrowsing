@@ -11,6 +11,7 @@ import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
+import com.kinley.moviebrowsing.jetcompose.VStack
 import com.kinley.moviebrowsing.jetcompose.observe
 import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 

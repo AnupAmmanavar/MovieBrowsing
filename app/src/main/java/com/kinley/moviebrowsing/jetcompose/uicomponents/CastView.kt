@@ -15,7 +15,7 @@ import com.kinley.data.models.Cast
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.CastDelegate
 import com.kinley.moviebrowsing.components.CastUIComponent
-import com.kinley.moviebrowsing.jetcompose.screens.HStack
+import com.kinley.moviebrowsing.jetcompose.HStack
 
 @Composable
 fun CastView(cast: Cast, delegate: CastDelegate) {
