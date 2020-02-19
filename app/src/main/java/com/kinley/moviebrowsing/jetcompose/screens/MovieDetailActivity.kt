@@ -1,5 +1,7 @@
 package com.kinley.moviebrowsing.jetcompose.screens
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -27,12 +29,26 @@ import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 
 class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
 
+
+    companion object {
+
+        private val MOVIE_ID_REC = "movie_id_rec"
+
+        fun getIntent(context: Context, movieId: Long): Intent {
+            return Intent(context, MovieDetailActivity::class.java)
+                .also {
+                    it.putExtra(MOVIE_ID_REC, movieId)
+                }
+        }
+    }
+
     private val vm: MovieDetailPageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.load(3870L)
+        val movieId = intent.extras?.getLong(MOVIE_ID_REC) ?: throw IllegalArgumentException("Please pass `$MOVIE_ID_REC` parameter")
+        vm.load(movieId)
         setContent {
             MaterialTheme {
                 MovieDetailPageView(vm.pageData, this)
@@ -49,7 +65,7 @@ class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
     }
 
     override fun onMovieClick(movie: Movie) {
-        Toast.makeText(this, "Movie = ${movie.title}", Toast.LENGTH_SHORT).show()
+        startActivity(getIntent(this, movieId = movie.id))
     }
 }
 

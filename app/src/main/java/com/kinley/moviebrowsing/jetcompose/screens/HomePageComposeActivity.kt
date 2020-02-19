@@ -1,6 +1,5 @@
 package com.kinley.moviebrowsing.jetcompose.screens
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,18 +7,14 @@ import androidx.compose.Composable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.ui.core.setContent
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.HMovieListView
+import com.kinley.moviebrowsing.jetcompose.uicomponents.render
 
-class JetPackComposeActivity : AppCompatActivity(), MovieDelegate {
+class HomePageComposeActivity : AppCompatActivity(), MovieDelegate {
 
 
     private val vm: HomePageViewModel by viewModels()
@@ -33,19 +28,17 @@ class JetPackComposeActivity : AppCompatActivity(), MovieDelegate {
 
         vm.pageData.observe(this, Observer {
             pageUIModel.copy(
-                    movieListUIComponents = it.movieListUIComponents
+                movieListUIComponents = it.movieListUIComponents
             )
         })
 
         setContent {
             HomePage(vm.pageData, this)
         }
-
-      startActivity(Intent(this, MovieDetailActivity::class.java))
     }
 
     override fun onMovieClick(movie: Movie) {
-
+        startActivity(MovieDetailActivity.getIntent(this, movie.id))
     }
 }
 
@@ -54,14 +47,11 @@ fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>, movieDelegate: 
 
     val homePageUIModel =
         observe(data = homePageUIModelLiveData)
-    VerticalScroller {
-        Column(modifier = LayoutPadding(4.dp)) {
-            homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
-                HMovieListView(movieListUIComponent, movieDelegate)
-            }
+
+    VStack {
+        homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
+            movieListUIComponent.composableView(movieDelegate).render()
         }
-
-
     }
 
 
