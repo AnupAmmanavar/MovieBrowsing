@@ -5,9 +5,7 @@ import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Container
-import androidx.ui.layout.EdgeInsets
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.*
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
@@ -33,9 +31,12 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
 
 @Composable
 fun HCastView(castListUIComponent: CastUIComponent, delegate: CastDelegate) {
-    HStack {
-        castListUIComponent.data.forEach { cast ->
-            CastView(cast = cast, delegate = delegate)
+    Column {
+        Text(text = "Cast")
+        HStack {
+            castListUIComponent.data.forEach { cast ->
+                CastView(cast = cast, delegate = delegate)
+            }
         }
     }
 

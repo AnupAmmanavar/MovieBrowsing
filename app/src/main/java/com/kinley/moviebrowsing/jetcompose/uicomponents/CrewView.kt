@@ -5,11 +5,14 @@ import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
+import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.EdgeInsets
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontStyle
+import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
 import com.kinley.data.models.Crew
 import com.kinley.moviebrowsing.R
@@ -30,17 +33,15 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
 
 @Composable
 fun HCrewView(crewListUIComponent: CrewUIComponent, delegate: CrewDelegate) {
-    HStack {
-        crewListUIComponent.data.forEach { crew ->
-            CrewView(crew = crew, delegate = delegate)
+
+    Card(borderWidth = 8.dp, contentColor = Color.Cyan) {
+        Column {
+            Text(text = "Crew", style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
+            HStack {
+                crewListUIComponent.data.forEach { crew ->
+                    CrewView(crew = crew, delegate = delegate)
+                }
+            }
         }
     }
 }
-
-//@Composable
-//@Preview
-//fun DefaultPreview() {
-//    MaterialTheme {
-//        CrewView(crew = Crew.testData, delegate = CrewDelegate)
-//    }
-//}
