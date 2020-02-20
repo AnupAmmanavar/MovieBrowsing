@@ -3,17 +3,14 @@ package com.kinley.moviebrowsing.jetcompose.uicomponents
 import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
 import androidx.ui.core.Text
-import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.Row
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.surface.Card
-import androidx.ui.unit.Size
+import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.components.MovieDelegate
@@ -25,7 +22,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun MovieView(movie: Movie, delegate: MovieDelegate) {
+fun MovieDetailView(movie: Movie, delegate: MovieDelegate) {
 
     val state = ImageState()
 
@@ -38,37 +35,15 @@ fun MovieView(movie: Movie, delegate: MovieDelegate) {
 
 
     val typography = MaterialTheme.typography()
-    Clickable(onClick = {
-        delegate.onMovieClick(movie)
-    }) {
+    Row(modifier = LayoutPadding(8.dp)) {
+        Container(width = 160.dp, height = 160.dp) {
+            DrawImage(image = state.image)
+        }
 
-        Card(
-            shape = RoundedCornerShape(
-                14.dp
-            )
-        ) {
-
-            Container(
-                modifier = LayoutSize(
-                    160.dp,
-                    200.dp
-                )
-            ) {
-
-                Column(
-                    modifier = LayoutPadding(5.dp)
-                ) {
-
-                    Container(width = 160.dp, height = 160.dp) {
-                        DrawImage(image = state.image)
-                    }
-
-                    Text(
-                        movie.title
-                    )
-                    Divider()
-                }
-            }
+        Column {
+            Text(movie.title, style = typography.h6)
+            Divider()
+            Text(movie.overview ?: "", maxLines = 5, overflow = TextOverflow.Ellipsis)
         }
     }
 }

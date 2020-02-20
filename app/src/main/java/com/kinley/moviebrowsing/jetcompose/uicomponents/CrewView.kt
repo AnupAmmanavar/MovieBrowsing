@@ -1,11 +1,12 @@
 package com.kinley.moviebrowsing.jetcompose.uicomponents
 
 import androidx.compose.Composable
-import androidx.compose.Model
 import androidx.core.graphics.drawable.toBitmap
+import androidx.ui.core.Clip
 import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
+import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Image
@@ -18,8 +19,6 @@ import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontStyle
 import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
-import coil.Coil
-import coil.api.get
 import com.kinley.data.models.Crew
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.CrewDelegate
@@ -49,7 +48,9 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
             Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
                 Column {
                     Container(width = 80.dp, height = 80.dp) {
-                        DrawImage(image = state.image)
+                        Clip(shape = CircleShape) {
+                            DrawImage(image = state.image)
+                        }
                     }
                     Text(text = crew.name, style = TextStyle(color = Color(R.color.green)))
                 }
@@ -63,7 +64,7 @@ fun HCrewView(crewListUIComponent: CrewUIComponent, delegate: CrewDelegate) {
 
     Card(borderWidth = 8.dp, contentColor = Color.Cyan) {
         Column {
-            Text(text = "Crew", style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
+            Text(text = "Crew", modifier = LayoutPadding(8.dp), style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
             HStack {
                 crewListUIComponent.data.forEach { crew ->
                     CrewView(crew = crew, delegate = delegate)

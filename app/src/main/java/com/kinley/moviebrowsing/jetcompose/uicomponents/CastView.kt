@@ -2,9 +2,11 @@ package com.kinley.moviebrowsing.jetcompose.uicomponents
 
 import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
+import androidx.ui.core.Clip
 import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
+import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
@@ -43,7 +45,9 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
             }) {
                 Column {
                     Container(width = 80.dp, height = 80.dp) {
-                        DrawImage(image = state.image)
+                        Clip(shape = CircleShape) {
+                            DrawImage(image = state.image)
+                        }
                     }
                     Text(text = cast.name, style = TextStyle(color = Color(R.color.yellow)))
                 }
@@ -55,7 +59,7 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
 @Composable
 fun HCastView(castListUIComponent: CastUIComponent, delegate: CastDelegate) {
     Column {
-        Text(text = "Cast")
+        Text(text = "Cast", modifier = LayoutPadding(8.dp))
         HStack {
             castListUIComponent.data.forEach { cast ->
                 CastView(cast = cast, delegate = delegate)
