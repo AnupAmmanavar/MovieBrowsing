@@ -2,6 +2,7 @@ package com.kinley.data.repository
 
 import com.kinley.data.models.*
 import com.kinley.data.setup.RetrofitServiceFactory
+import retrofit2.http.Path
 
 interface MovieBrowsingRemote {
 
@@ -24,6 +25,8 @@ interface MovieBrowsingRemote {
   suspend fun getPersonDetails(id: Long): Person
 
   suspend fun getMovieCreditsForPerson(id: Long): PersonCastResponseModel
+
+  suspend fun getMovies(query: String): MoviesDataModel
 }
 
 class MovieBrowsingRemoteImpl(
@@ -50,4 +53,6 @@ class MovieBrowsingRemoteImpl(
   override suspend fun getPersonDetails(id: Long) = service.getPersonDetails(id)
 
   override suspend fun getMovieCreditsForPerson(id: Long) = service.getMovieCreditsForPerson(id)
+
+  override suspend fun getMovies(query: String): MoviesDataModel = service.getMovies(query)
 }

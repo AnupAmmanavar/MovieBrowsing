@@ -3,6 +3,7 @@ package com.kinley.data.repository
 import com.kinley.data.models.*
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 const val API_KEY = "api_key=1d9b898a212ea52e283351e521e17871"
 
@@ -38,4 +39,6 @@ interface MovieBrowsing {
   @GET("person/{id}/movie_credits?$API_KEY")
   suspend fun getMovieCreditsForPerson(@Path("id") id: Long): PersonCastResponseModel
 
+  @GET("search/movie?$API_KEY")
+  suspend fun getMovies(@Query("query") query: String): MoviesDataModel
 }

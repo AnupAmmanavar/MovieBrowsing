@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.ui.core.setContent
+import androidx.ui.layout.Column
 import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.components.MovieDelegate
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
@@ -20,18 +20,10 @@ class HomePageComposeActivity : AppCompatActivity(), MovieDelegate {
 
     private val vm: HomePageViewModel by viewModels()
 
-    private var pageUIModel: HomePageUIModel = HomePageUIModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         lifecycle.addObserver(vm)
-
-        vm.pageData.observe(this, Observer {
-            pageUIModel.copy(
-                movieListUIComponents = it.movieListUIComponents
-            )
-        })
 
         setContent {
             HomePage(vm.pageData, this)
@@ -49,20 +41,18 @@ fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>, movieDelegate: 
     val homePageUIModel =
         observe(data = homePageUIModelLiveData)
 
-    VStack {
-        homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
-            movieListUIComponent.composableView(movieDelegate).render()
+    Column {
+        Column {
+            homePageUIModel?.inputViewComponent?.composableView(movieDelegate).render()
+            homePageUIModel?.searchButtonComponent?.composableView(movieDelegate).render()
+        }
+        VStack {
+            homePageUIModel?.searchedMovies?.composableView(movieDelegate).render()
+            homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
+                movieListUIComponent.composableView(movieDelegate).render()
+            }
         }
     }
 
 
 }
-
-/*
-@Preview
-@Composable
-fun DefaultPreview() {
-    MaterialTheme {
-        MovieView(movie = Movie.testData)
-    }
-}*/
