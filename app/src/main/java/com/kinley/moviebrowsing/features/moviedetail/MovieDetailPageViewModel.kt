@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kinley.data.repository.MovieBrowsingRemote
 import com.kinley.data.repository.MovieBrowsingRemoteImpl
 import com.kinley.jetpackui.jetcompose.components.*
 import com.kinley.jetpackui.jetcompose.components.UIComponent
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MovieDetailPageViewModel : ViewModel() {
 
-    private val repository = MovieBrowsingRemoteImpl()
+    private val repository: MovieBrowsingRemote = MovieBrowsingRemoteImpl()
 
     private val _pageData: MutableLiveData<MovieDetailPageUiModel> = MutableLiveData()
     val pageData: LiveData<MovieDetailPageUiModel>
@@ -40,8 +41,8 @@ class MovieDetailPageViewModel : ViewModel() {
     private fun loadCastAndCrew(id: Long) {
         viewModelScope.launch {
             val credits = repository.getCredits(id)
-            val castMembers = credits.cast.filter { it.profile_path != null }
-            val crewMembers = credits.crew.filter { it.profile_path != null }
+            val castMembers = credits.cast.filter { it.profile_path != null }.distinctBy { it.id }
+            val crewMembers = credits.crew.filter { it.profile_path != null }.distinctBy { it.id }
 
 
 

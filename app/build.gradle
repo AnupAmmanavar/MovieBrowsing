@@ -85,11 +85,4 @@ dependencies {
     // if you use the support libraries
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
-
-    implementation("io.coil-kt:coil:0.9.5")
-
-
 }
