@@ -9,12 +9,10 @@ import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.Container
-import androidx.ui.layout.EdgeInsets
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.*
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import com.kinley.data.models.Cast
 import com.kinley.jetpackui.R
@@ -39,19 +37,19 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
         }
     }
 
-    Container(modifier = LayoutPadding(8.dp), padding = EdgeInsets(8.dp)) {
+    Container(padding = EdgeInsets(8.dp)) {
         Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
 
             Clickable(onClick = {
                 delegate.onCastClick(cast)
             }) {
                 Column {
-                    Container(width = 80.dp, height = 80.dp) {
+                    Container(width = 100.dp, height = 100.dp) {
                         Clip(shape = CircleShape) {
                             DrawImage(image = state.image)
                         }
                     }
-                    Text(text = cast.name, style = TextStyle(color = Color(R.color.yellow)))
+                    Text(text = cast.name, style = TextStyle(color = Color(R.color.yellow)), maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = LayoutWidth(100.dp))
                 }
             }
         }

@@ -9,13 +9,11 @@ import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.Container
-import androidx.ui.layout.EdgeInsets
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.*
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontStyle
+import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
 import com.kinley.data.models.Crew
@@ -41,16 +39,18 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
         }
     }
 
+    val layoutWidth = 100.dp
+
     Clickable(onClick = { delegate.onCrewClick(crew) }) {
-        Container(modifier = LayoutPadding(8.dp), padding = EdgeInsets(8.dp)) {
+        Container(padding = EdgeInsets(8.dp)) {
             Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
                 Column {
-                    Container(width = 80.dp, height = 80.dp) {
+                    Container(width = layoutWidth, height = layoutWidth) {
                         Clip(shape = CircleShape) {
                             DrawImage(image = state.image)
                         }
                     }
-                    Text(text = crew.name, style = TextStyle(color = Color(R.color.green)))
+                    Text(text = crew.name, style = TextStyle(color = Color(R.color.green)), maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = LayoutWidth(layoutWidth))
                 }
             }
         }
