@@ -1,13 +1,12 @@
-package com.kinley.moviebrowsing.components
+package com.kinley.moviebrowsing.jetcompose.components
 
 import com.kinley.data.models.Crew
-import com.kinley.moviebrowsing.jetcompose.uicomponents.ComposableView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.HCrewView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.ComposableView
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.HCrewView
 
 class CrewUIComponent(
     private val crewList: List<Crew>
-) : JetView<CrewDelegate> {
+) : UIComponent<CrewDelegate> {
 
     override fun composableView(delegate: CrewDelegate): ComposableView = {
         HCrewView(crewList = crewList, delegate = delegate)

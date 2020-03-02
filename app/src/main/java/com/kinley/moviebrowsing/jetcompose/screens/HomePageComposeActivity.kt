@@ -8,12 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.ui.core.setContent
 import androidx.ui.layout.Column
 import com.kinley.data.models.Movie
-import com.kinley.moviebrowsing.components.MovieDelegate
+import com.kinley.moviebrowsing.jetcompose.components.MovieDelegate
 import com.kinley.moviebrowsing.features.home.HomePageUIModel
 import com.kinley.moviebrowsing.features.home.HomePageViewModel
 import com.kinley.moviebrowsing.jetcompose.VStack
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.render
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.render
 
 class HomePageComposeActivity : AppCompatActivity(), MovieDelegate {
 
@@ -41,16 +41,10 @@ fun HomePage(homePageUIModelLiveData: LiveData<HomePageUIModel>, movieDelegate: 
     val homePageUIModel =
         observe(data = homePageUIModelLiveData)
 
-    Column {
-        Column {
-            homePageUIModel?.inputViewComponent?.composableView(movieDelegate).render()
-            homePageUIModel?.searchButtonComponent?.composableView(movieDelegate).render()
-        }
-        VStack {
-            homePageUIModel?.searchedMovies?.composableView(movieDelegate).render()
-            homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
-                movieListUIComponent.composableView(movieDelegate).render()
-            }
+    VStack {
+        homePageUIModel?.searchedMovies?.composableView(movieDelegate).render()
+        homePageUIModel?.movieListUIComponents?.forEach { movieListUIComponent ->
+            movieListUIComponent.composableView(movieDelegate).render()
         }
     }
 

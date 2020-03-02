@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.components
+package com.kinley.moviebrowsing.jetcompose.components
 
 interface UIDelegate
 

@@ -1,16 +1,17 @@
-package com.kinley.moviebrowsing.jetcompose.uicomponents
+package com.kinley.moviebrowsing.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.compose.state
 import androidx.ui.core.TextField
 import androidx.ui.material.Button
 import androidx.ui.material.ContainedButtonStyle
-import com.kinley.moviebrowsing.components.UIDelegate
+import com.kinley.moviebrowsing.jetcompose.components.UIComponent
+import com.kinley.moviebrowsing.jetcompose.components.UIDelegate
 
 class InputViewComponent(
     private val text: String?,
     private val UIEventDispatcher: UIEventDispatcher
-) : JetView<UIDelegate> {
+) : UIComponent<UIDelegate> {
 
     override fun composableView(delegate: UIDelegate): ComposableView {
         return {
@@ -22,7 +23,7 @@ class InputViewComponent(
 
 class SearchButtonComponent(
     private val buttonEventDispatcher: ButtonEventDispatcher
-): JetView<UIDelegate> {
+): UIComponent<UIDelegate> {
 
     override fun composableView(delegate: UIDelegate): ComposableView {
         return {

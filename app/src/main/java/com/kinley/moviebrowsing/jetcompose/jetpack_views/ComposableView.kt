@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose.uicomponents
+package com.kinley.moviebrowsing.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 

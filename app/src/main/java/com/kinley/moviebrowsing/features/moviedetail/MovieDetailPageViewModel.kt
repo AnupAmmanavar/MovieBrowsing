@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kinley.data.repository.MovieBrowsingRemoteImpl
-import com.kinley.moviebrowsing.components.*
-import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
+import com.kinley.moviebrowsing.jetcompose.components.*
+import com.kinley.moviebrowsing.jetcompose.components.UIComponent
 import kotlinx.coroutines.launch
 
 class MovieDetailPageViewModel : ViewModel() {
@@ -126,10 +126,10 @@ data class MovieDetailPageUiModel(
 
     /**
      * All the components that needs to be rendered are filtered here.
-     * The order of the JetViews are decided here
+     * The order of the UIComponents are decided here
      */
-    fun components(): ArrayList<JetView<UIDelegate>> {
-        val cmps = arrayListOf<JetView<out UIDelegate>>()
+    fun components(): ArrayList<UIComponent<UIDelegate>> {
+        val cmps = arrayListOf<UIComponent<out UIDelegate>>()
 
         cmps.addNonNull(movieDetailUIComponent)
         cmps.addNonNull(crewUIComponent)
@@ -137,12 +137,12 @@ data class MovieDetailPageUiModel(
         cmps.addNonNull(recommendedMoviesListUIComponent)
         cmps.addNonNull(similarMoviesListUIComponent)
 
-        return cmps as ArrayList<JetView<UIDelegate>>
+        return cmps as ArrayList<UIComponent<UIDelegate>>
     }
 }
 
-fun ArrayList<JetView<*>>.addNonNull(jetView: JetView<*>?): List<JetView<*>> {
-    if (jetView == null) return this
-    add(jetView)
+fun ArrayList<UIComponent<*>>.addNonNull(UIComponent: UIComponent<*>?): List<UIComponent<*>> {
+    if (UIComponent == null) return this
+    add(UIComponent)
     return this
 }

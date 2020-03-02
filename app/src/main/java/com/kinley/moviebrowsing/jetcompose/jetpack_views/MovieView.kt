@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose.uicomponents
+package com.kinley.moviebrowsing.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
@@ -13,10 +13,9 @@ import androidx.ui.layout.LayoutSize
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Card
-import androidx.ui.unit.Size
 import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
-import com.kinley.moviebrowsing.components.MovieDelegate
+import com.kinley.moviebrowsing.jetcompose.components.MovieDelegate
 import com.kinley.moviebrowsing.extensions.ImageState
 import com.kinley.moviebrowsing.extensions.RemoteImage
 import com.kinley.moviebrowsing.extensions.loadImage

@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose.uicomponents
+package com.kinley.moviebrowsing.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.ui.core.Text
@@ -14,7 +14,7 @@ import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import com.kinley.data.models.Movie
 import com.kinley.moviebrowsing.R
-import com.kinley.moviebrowsing.components.MovieDelegate
+import com.kinley.moviebrowsing.jetcompose.components.MovieDelegate
 import com.kinley.moviebrowsing.jetcompose.image
 
 @Composable

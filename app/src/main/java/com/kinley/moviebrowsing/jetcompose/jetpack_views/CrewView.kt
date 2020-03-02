@@ -1,4 +1,4 @@
-package com.kinley.moviebrowsing.jetcompose.uicomponents
+package com.kinley.moviebrowsing.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
@@ -15,10 +15,12 @@ import androidx.ui.layout.EdgeInsets
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontStyle
+import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
-import com.kinley.data.models.Cast
+import com.kinley.data.models.Crew
 import com.kinley.moviebrowsing.R
-import com.kinley.moviebrowsing.components.CastDelegate
+import com.kinley.moviebrowsing.jetcompose.components.CrewDelegate
 import com.kinley.moviebrowsing.extensions.ImageState
 import com.kinley.moviebrowsing.extensions.RemoteImage
 import com.kinley.moviebrowsing.extensions.loadImage
@@ -28,30 +30,27 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun CastView(cast: Cast, delegate: CastDelegate) {
+fun CrewView(crew: Crew, delegate: CrewDelegate) {
 
     val state = ImageState()
 
     GlobalScope.launch {
-        val drawable = loadImage(cast.profile_path ?: "")
+        val drawable = loadImage(crew.profile_path ?: "")
         MainScope().launch {
             state.image = RemoteImage(drawable.toBitmap())
         }
     }
 
-    Container(modifier = LayoutPadding(8.dp), padding = EdgeInsets(8.dp)) {
-        Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
-
-            Clickable(onClick = {
-                delegate.onCastClick(cast)
-            }) {
+    Clickable(onClick = { delegate.onCrewClick(crew) }) {
+        Container(modifier = LayoutPadding(8.dp), padding = EdgeInsets(8.dp)) {
+            Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
                 Column {
                     Container(width = 80.dp, height = 80.dp) {
                         Clip(shape = CircleShape) {
                             DrawImage(image = state.image)
                         }
                     }
-                    Text(text = cast.name, style = TextStyle(color = Color(R.color.yellow)))
+                    Text(text = crew.name, style = TextStyle(color = Color(R.color.green)))
                 }
             }
         }
@@ -59,14 +58,16 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
 }
 
 @Composable
-fun HCastView(castList: List<Cast>, delegate: CastDelegate) {
-    Column {
-        Text(text = "Cast", modifier = LayoutPadding(8.dp))
-        HStack {
-            castList.forEach { cast ->
-                CastView(cast = cast, delegate = delegate)
+fun HCrewView(crewList: List<Crew>, delegate: CrewDelegate) {
+
+    Card(borderWidth = 8.dp, contentColor = Color.Cyan) {
+        Column {
+            Text(text = "Crew", modifier = LayoutPadding(8.dp), style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
+            HStack {
+                crewList.forEach { crew ->
+                    CrewView(crew = crew, delegate = delegate)
+                }
             }
         }
     }
-
 }

@@ -13,12 +13,12 @@ import androidx.ui.material.MaterialTheme
 import com.kinley.data.models.Cast
 import com.kinley.data.models.Crew
 import com.kinley.data.models.Movie
-import com.kinley.moviebrowsing.components.CompositDelegate
+import com.kinley.moviebrowsing.jetcompose.components.CompositDelegate
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageUiModel
 import com.kinley.moviebrowsing.features.moviedetail.MovieDetailPageViewModel
 import com.kinley.moviebrowsing.jetcompose.VStack
 import com.kinley.moviebrowsing.jetcompose.observe
-import com.kinley.moviebrowsing.jetcompose.uicomponents.render
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.render
 
 class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
 

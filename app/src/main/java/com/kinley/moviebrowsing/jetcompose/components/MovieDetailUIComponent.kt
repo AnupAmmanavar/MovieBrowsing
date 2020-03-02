@@ -1,14 +1,13 @@
-package com.kinley.moviebrowsing.components
+package com.kinley.moviebrowsing.jetcompose.components
 
 
 import com.kinley.data.models.Movie
-import com.kinley.moviebrowsing.jetcompose.uicomponents.ComposableView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.JetView
-import com.kinley.moviebrowsing.jetcompose.uicomponents.MovieDetailView
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.ComposableView
+import com.kinley.moviebrowsing.jetcompose.jetpack_views.MovieDetailView
 
 class MovieDetailUIComponent(
     private val movie: Movie
-) : JetView<MovieDelegate> {
+) : UIComponent<MovieDelegate> {
 
     override fun composableView(delegate: MovieDelegate): ComposableView {
         return  {
