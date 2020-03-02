@@ -55,7 +55,6 @@ dependencies {
 
     def nav_version = "2.3.0-alpha01"
     def dagger_version = "2.26"
-    def epoxy_version = "3.9.0"
     def glide_version = "4.11.0"
 
     implementation project(":data")
@@ -86,9 +85,6 @@ dependencies {
     // if you use the support libraries
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    implementation "com.airbnb.android:epoxy:$epoxy_version"
-    kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
-    implementation "com.airbnb.android:epoxy-databinding:$epoxy_version"
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"

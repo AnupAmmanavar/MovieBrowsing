@@ -60,13 +60,13 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
 }
 
 @Composable
-fun HCrewView(crewListUIComponent: CrewUIComponent, delegate: CrewDelegate) {
+fun HCrewView(crewList: List<Crew>, delegate: CrewDelegate) {
 
     Card(borderWidth = 8.dp, contentColor = Color.Cyan) {
         Column {
             Text(text = "Crew", modifier = LayoutPadding(8.dp), style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
             HStack {
-                crewListUIComponent.data.forEach { crew ->
+                crewList.forEach { crew ->
                     CrewView(crew = crew, delegate = delegate)
                 }
             }

@@ -9,14 +9,16 @@ import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Column
+import androidx.ui.layout.Container
+import androidx.ui.layout.EdgeInsets
+import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import com.kinley.data.models.Cast
 import com.kinley.moviebrowsing.R
 import com.kinley.moviebrowsing.components.CastDelegate
-import com.kinley.moviebrowsing.components.CastUIComponent
 import com.kinley.moviebrowsing.extensions.ImageState
 import com.kinley.moviebrowsing.extensions.RemoteImage
 import com.kinley.moviebrowsing.extensions.loadImage
@@ -57,11 +59,11 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
 }
 
 @Composable
-fun HCastView(castListUIComponent: CastUIComponent, delegate: CastDelegate) {
+fun HCastView(castList: List<Cast>, delegate: CastDelegate) {
     Column {
         Text(text = "Cast", modifier = LayoutPadding(8.dp))
         HStack {
-            castListUIComponent.data.forEach { cast ->
+            castList.forEach { cast ->
                 CastView(cast = cast, delegate = delegate)
             }
         }
