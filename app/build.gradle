@@ -57,6 +57,7 @@ dependencies {
     def glide_version = "4.11.0"
 
     implementation project(":data")
+    implementation project(":jetpackui")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

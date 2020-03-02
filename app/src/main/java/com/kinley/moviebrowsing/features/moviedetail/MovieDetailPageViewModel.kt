@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kinley.data.repository.MovieBrowsingRemoteImpl
-import com.kinley.moviebrowsing.jetcompose.components.*
-import com.kinley.moviebrowsing.jetcompose.components.UIComponent
+import com.kinley.jetpackui.jetcompose.components.*
+import com.kinley.jetpackui.jetcompose.components.UIComponent
 import kotlinx.coroutines.launch
 
 class MovieDetailPageViewModel : ViewModel() {

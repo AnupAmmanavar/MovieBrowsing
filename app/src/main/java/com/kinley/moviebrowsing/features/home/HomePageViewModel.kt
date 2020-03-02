@@ -4,11 +4,11 @@ import androidx.compose.Model
 import androidx.lifecycle.*
 import com.kinley.data.models.MoviesDataModel
 import com.kinley.data.repository.MovieBrowsingRemoteImpl
-import com.kinley.moviebrowsing.jetcompose.components.MovieListUIComponent
-import com.kinley.moviebrowsing.jetcompose.jetpack_views.ButtonEventDispatcher
-import com.kinley.moviebrowsing.jetcompose.jetpack_views.InputViewComponent
-import com.kinley.moviebrowsing.jetcompose.jetpack_views.SearchButtonComponent
-import com.kinley.moviebrowsing.jetcompose.jetpack_views.UIEventDispatcher
+import com.kinley.jetpackui.jetcompose.components.MovieListUIComponent
+import com.kinley.jetpackui.jetcompose.jetpack_views.ButtonEventDispatcher
+import com.kinley.jetpackui.jetcompose.jetpack_views.InputViewComponent
+import com.kinley.jetpackui.jetcompose.jetpack_views.SearchButtonComponent
+import com.kinley.jetpackui.jetcompose.jetpack_views.UIEventDispatcher
 import kotlinx.coroutines.launch
 
 class HomePageViewModel : ViewModel(), LifecycleObserver, UIEventDispatcher, ButtonEventDispatcher {

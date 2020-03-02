@@ -38,23 +38,3 @@ fun ImageView.loadCircularImage(imageURL: String?) {
         )
         .into(this)
 }
-
-
-@Model
-class ImageState {
-    var image: Image = Image(64, 64)
-}
-
-class RemoteImage(private val bitmap: Bitmap) : Image {
-    override val width = bitmap.width
-    override val height = bitmap.height
-    override val config = ImageConfig.Argb8888
-    override val colorSpace = ColorSpaces.Srgb
-    override val hasAlpha = bitmap.hasAlpha()
-    override val nativeImage = bitmap
-    override fun prepareToDraw() = bitmap.prepareToDraw()
-}
-
-suspend fun loadImage(imageUrl: String): Drawable {
-    return Coil.get("https://image.tmdb.org/t/p/w300/${imageUrl}") {}
-}
