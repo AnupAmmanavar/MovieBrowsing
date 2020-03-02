@@ -1,2 +1,4 @@
+include ':jetpackui'
+include ':data'
 include ':app'
 rootProject.name = "MovieBrowsing"
