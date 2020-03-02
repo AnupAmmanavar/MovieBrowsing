@@ -5,10 +5,11 @@ import com.kinley.jetpackui.jetcompose.jetpack_views.ComposableView
 import com.kinley.jetpackui.jetcompose.jetpack_views.HMovieListView
 
 class MovieListUIComponent(
-    private val movieList: List<Movie>
+  private val subHeader: String,
+  private val movieList: List<Movie>
 ) : UIComponent<MovieDelegate> {
 
-    override fun composableView(delegate: MovieDelegate): ComposableView = {
-        HMovieListView(movieList = movieList, delegate = delegate)
-    }
+  override fun composableView(delegate: MovieDelegate): ComposableView = {
+    HMovieListView(header = subHeader, movieList = movieList, delegate = delegate)
+  }
 }

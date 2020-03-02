@@ -21,16 +21,16 @@ class HomePageViewModel : ViewModel(), LifecycleObserver, UIEventDispatcher, But
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun load() {
         pageData.value = HomePageUIModel(InputViewComponent("", this), SearchButtonComponent(this))
-        moviesLoader { repository.getPopularMovies() }
-        moviesLoader { repository.getTopRatedMovies() }
-        moviesLoader { repository.getUpcomingMovies() }
-        moviesLoader { repository.getPlayingNow() }
+        moviesLoader("Popular movies") { repository.getPopularMovies() }
+        moviesLoader("Top rated movies") { repository.getTopRatedMovies() }
+        moviesLoader("Upcoming movies") { repository.getUpcomingMovies() }
+        moviesLoader("Playing now") { repository.getPlayingNow() }
     }
 
-    private fun moviesLoader(loader: suspend () -> MoviesDataModel) {
+    private fun moviesLoader(category: String, loader: suspend () -> MoviesDataModel) {
         viewModelScope.launch {
             val movies = loader.invoke().movies
-            addMoviesList(MovieListUIComponent(movies))
+            addMoviesList(MovieListUIComponent(category, movies))
         }
     }
 
@@ -52,7 +52,7 @@ class HomePageViewModel : ViewModel(), LifecycleObserver, UIEventDispatcher, But
     override fun onSearchClicked() {
         viewModelScope.launch {
             val movieQuery = query.value ?: return@launch
-            val searchedMovieComponent = MovieListUIComponent(repository.getMovies(movieQuery).movies)
+            val searchedMovieComponent = MovieListUIComponent("Results for ${movieQuery}", repository.getMovies(movieQuery).movies)
             pageData.value = pageData.value?.copy(searchedMovies = searchedMovieComponent)
         }
     }

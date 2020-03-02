@@ -61,7 +61,8 @@ class MovieDetailPageViewModel : ViewModel() {
             setUIData(
                 getPageDataValue().copy(
                     recommendedMoviesListUIComponent = MovieListUIComponent(
-                        recommendedMovies
+                        subHeader = "Recommended movies",
+                        movieList = recommendedMovies
                     )
                 )
             )
@@ -75,7 +76,8 @@ class MovieDetailPageViewModel : ViewModel() {
             setUIData(
                 getPageDataValue().copy(
                     similarMoviesListUIComponent = MovieListUIComponent(
-                        similarMovies
+                        subHeader = "Similar movies",
+                        movieList = similarMovies
                     )
                 )
             )
