@@ -53,8 +53,6 @@ android {
 dependencies {
 
     def nav_version = "2.3.0-alpha01"
-    def dagger_version = "2.26"
-    def glide_version = "4.11.0"
 
     implementation project(":data")
     implementation project(":jetpackui")
@@ -79,10 +77,4 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    // if you use the support libraries
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-
 }
