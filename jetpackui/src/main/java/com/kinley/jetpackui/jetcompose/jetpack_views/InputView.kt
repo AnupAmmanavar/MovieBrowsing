@@ -2,9 +2,9 @@ package com.kinley.jetpackui.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.compose.state
+import androidx.ui.core.Text
 import androidx.ui.core.TextField
 import androidx.ui.material.Button
-import androidx.ui.material.ContainedButtonStyle
 import com.kinley.jetpackui.jetcompose.components.UIComponent
 import com.kinley.jetpackui.jetcompose.components.UIDelegate
 
@@ -23,7 +23,7 @@ class InputViewComponent(
 
 class SearchButtonComponent(
     private val buttonEventDispatcher: ButtonEventDispatcher
-): UIComponent<UIDelegate> {
+) : UIComponent<UIDelegate> {
 
     override fun composableView(delegate: UIDelegate): ComposableView {
         return {
@@ -48,10 +48,10 @@ fun InputView(text: String, UIEventDispatcher: UIEventDispatcher) {
 @Composable
 fun SearchButton(text: String, buttonEventDispatcher: ButtonEventDispatcher) {
     Button(
-        text = text,
-        onClick = { buttonEventDispatcher.onSearchClicked() },
-        style  = ContainedButtonStyle()
-    )
+        onClick = { buttonEventDispatcher.onSearchClicked() }
+    ) {
+        Text(text = text)
+    }
 }
 
 interface ButtonEventDispatcher {

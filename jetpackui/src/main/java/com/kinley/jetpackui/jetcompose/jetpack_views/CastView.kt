@@ -4,6 +4,7 @@ import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
 import androidx.ui.core.Clip
 import androidx.ui.core.Text
+import androidx.ui.foundation.Border
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.shape.corner.CircleShape
@@ -38,7 +39,7 @@ fun CastView(cast: Cast, delegate: CastDelegate) {
     }
 
     Container(padding = EdgeInsets(8.dp)) {
-        Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
+        Card(shape = RoundedCornerShape(10)) {
 
             Clickable(onClick = {
                 delegate.onCastClick(cast)

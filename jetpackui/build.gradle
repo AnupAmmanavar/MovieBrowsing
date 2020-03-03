@@ -47,6 +47,8 @@ dependencies {
 
     implementation project(":data")
 
+    def jetpack_compose_version = "0.1.0-dev05"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -55,10 +57,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'androidx.ui:ui-framework:0.1.0-dev04'
-    implementation 'androidx.ui:ui-layout:0.1.0-dev04'
-    implementation 'androidx.ui:ui-material:0.1.0-dev04'
-    implementation 'androidx.ui:ui-tooling:0.1.0-dev04'
+    implementation "androidx.ui:ui-framework:$jetpack_compose_version"
+    implementation "androidx.ui:ui-layout:$jetpack_compose_version"
+    implementation "androidx.ui:ui-material:$jetpack_compose_version"
+    implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
 
     implementation("io.coil-kt:coil:0.9.5")
 

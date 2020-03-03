@@ -4,6 +4,7 @@ import androidx.compose.Composable
 import androidx.core.graphics.drawable.toBitmap
 import androidx.ui.core.Clip
 import androidx.ui.core.Text
+import androidx.ui.foundation.Border
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.shape.corner.CircleShape
@@ -43,7 +44,7 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
 
     Clickable(onClick = { delegate.onCrewClick(crew) }) {
         Container(padding = EdgeInsets(8.dp)) {
-            Card(shape = RoundedCornerShape(10), borderWidth = 8.dp) {
+            Card(shape = RoundedCornerShape(10)) {
                 Column {
                     Container(width = layoutWidth, height = layoutWidth) {
                         Clip(shape = CircleShape) {
@@ -60,7 +61,7 @@ fun CrewView(crew: Crew, delegate: CrewDelegate) {
 @Composable
 fun HCrewView(crewList: List<Crew>, delegate: CrewDelegate) {
 
-    Card(borderWidth = 8.dp, contentColor = Color.Cyan) {
+    Card(contentColor = Color.Cyan) {
         Column {
             Text(text = "Crew", modifier = LayoutPadding(8.dp), style = TextStyle(Color.Black, fontStyle = FontStyle.Italic, fontSize = TextUnit(12)))
             HStack {
