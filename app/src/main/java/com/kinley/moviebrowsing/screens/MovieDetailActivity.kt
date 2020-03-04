@@ -62,7 +62,7 @@ class MovieDetailActivity : AppCompatActivity(), CompositDelegate {
     }
 
     override fun onMovieClick(movie: Movie) {
-        startActivity(getIntent(this, movieId = movie.id))
+        // Dont handle click here
     }
 }
 

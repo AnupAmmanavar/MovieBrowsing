@@ -8,6 +8,7 @@ import androidx.compose.Composable
 import androidx.compose.Context
 import androidx.lifecycle.LiveData
 import androidx.ui.core.setContent
+import androidx.ui.foundation.AdapterList
 import androidx.ui.layout.Column
 import androidx.ui.material.MaterialTheme
 import com.kinley.data.models.Movie
@@ -47,8 +48,12 @@ fun SearchPageView(pageData: LiveData<SearchPageUIModel>, movieDelegate: MovieDe
 
     Column {
         uiModel?.inputViewComponent?.composableView(movieDelegate).render()
-        VStack {
-            uiModel?.searchedMoviesListComponent?.composableView(movieDelegate).render()
+
+        uiModel?.searchedMoviesListComponent?.let {
+
+            AdapterList(data = arrayListOf(it)) {
+                it.composableView(delegate = movieDelegate).render()
+            }
         }
     }
 }

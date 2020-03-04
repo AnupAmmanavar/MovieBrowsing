@@ -2,6 +2,7 @@ package com.kinley.jetpackui.jetcompose.jetpack_views
 
 import androidx.compose.Composable
 import androidx.ui.core.Text
+import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.DrawImage
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
@@ -25,15 +26,18 @@ fun MovieDetailView(movie: Movie, delegate: MovieDelegate) {
 
 
   val typography = MaterialTheme.typography()
-  Row(modifier = LayoutPadding(8.dp)) {
-    Container(width = 160.dp, height = 160.dp) {
-      DrawImage(image = image)
-    }
+  Clickable(onClick = { delegate.onMovieClick(movie = movie) }) {
 
-    Column {
-      Text(movie.title, style = typography.h6)
-      Divider()
-      Text(movie.overview ?: "", maxLines = 5, overflow = TextOverflow.Ellipsis)
+    Row(modifier = LayoutPadding(8.dp)) {
+      Container(width = 160.dp, height = 160.dp) {
+        DrawImage(image = image)
+      }
+
+      Column {
+        Text(movie.title, style = typography.h6)
+        Divider()
+        Text(movie.overview ?: "", maxLines = 5, overflow = TextOverflow.Ellipsis)
+      }
     }
   }
 }
