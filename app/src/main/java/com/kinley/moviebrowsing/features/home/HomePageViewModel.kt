@@ -52,7 +52,8 @@ class HomePageViewModel : ViewModel(), LifecycleObserver, UIEventDispatcher, But
     override fun onSearchClicked() {
         viewModelScope.launch {
             val movieQuery = query.value ?: return@launch
-            val searchedMovieComponent = MovieListUIComponent("Results for ${movieQuery}", repository.getMovies(movieQuery).movies)
+            val movies = repository.getMovies(movieQuery).movies.filter { it.poster_path != null }
+            val searchedMovieComponent = MovieListUIComponent("Results for $movieQuery", movies)
             pageData.value = pageData.value?.copy(searchedMovies = searchedMovieComponent)
         }
     }

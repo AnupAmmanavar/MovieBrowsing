@@ -11,4 +11,5 @@
     <string name="test_character_name">Mohan</string>
     <string name="test_cast_name">Shah Rukh Khan</string>
     <string name="title_activity_jet_pack_compose">My Compose App</string>
+    <string name="title_activity_search_page_compose">SearchPage</string>
 </resources>

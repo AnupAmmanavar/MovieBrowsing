@@ -72,6 +72,10 @@ dependencies {
     implementation "androidx.ui:ui-material:$jetpack_compose_version"
     implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
 
+    implementation 'androidx.ui:ui-framework:0.1.0-dev05'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev05'
+    implementation 'androidx.ui:ui-material:0.1.0-dev05'
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev05'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
