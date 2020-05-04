@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.kinley.moviebrowsing.screens.MainActivity"
+            android:name="com.kinley.moviebrowsing.screens.EarningsComposeActivity"
             android:label="@string/title_activity_jet_pack_compose"
             android:theme="@style/AppTheme.NoActionBar">
 

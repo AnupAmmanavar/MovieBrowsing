@@ -8,6 +8,7 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Container
 import androidx.ui.layout.EdgeInsets
+import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
 import com.kinley.jetpackui.R
@@ -18,15 +19,15 @@ import com.kinley.jetpackui.jetcompose.jetpack_views.ComposableView
 class WeekUXComponent(
   private val vmDelegate: WeekVMDelegate,
   private val dataStream: WeekUIModel
-) : UXComponent<WeekUIDelegate, WeekVMDelegate, WeekUIModel>(vmDelegate, dataStream) {
+) : UXComponent<UIDelegate, WeekVMDelegate, WeekUIModel>(vmDelegate, dataStream) {
 
-  override fun composableView(delegate: WeekUIDelegate): ComposableView = {
+  override fun composableView(delegate: UIDelegate): ComposableView = {
     HWeekListView(ui = delegate, vm = vmDelegate, data = data)
   }
 }
 
 @Composable
-fun HWeekListView(ui: WeekUIDelegate, vm: WeekVMDelegate, data: WeekUIModel) {
+fun HWeekListView(ui: UIDelegate, vm: WeekVMDelegate, data: WeekUIModel) {
   HStack {
     data.weeks.forEach { week ->
       WeekView(ui = ui, vm = vm, data = week, isSelected = week.equals(data.selectedWeek))
@@ -35,7 +36,7 @@ fun HWeekListView(ui: WeekUIDelegate, vm: WeekVMDelegate, data: WeekUIModel) {
 }
 
 @Composable
-fun WeekView(ui: WeekUIDelegate, vm: WeekVMDelegate, data: String, isSelected: Boolean) {
+fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: Week, isSelected: Boolean) {
 
   val color = Color(if (isSelected) R.color.golden else R.color.yellow)
   Container(padding = EdgeInsets(8.dp)) {
@@ -44,7 +45,7 @@ fun WeekView(ui: WeekUIDelegate, vm: WeekVMDelegate, data: String, isSelected: B
       Clickable(onClick = {
         vm.onWeekSelected(data)
       }) {
-        Text(text = "Week $data")
+        Text(text = "Week ${data.desc}", modifier = LayoutPadding(8.dp))
       }
     }
   }
@@ -53,12 +54,14 @@ fun WeekView(ui: WeekUIDelegate, vm: WeekVMDelegate, data: String, isSelected: B
 
 
 interface WeekUIDelegate : UIDelegate {
-  fun onWeekSelected(identifier: String)
+  fun onWeekSelected(week: Week)
 }
 
 interface WeekVMDelegate : VMDelegate {
-  fun onWeekSelected(identifier: String)
+  fun onWeekSelected(week: Week)
 }
 
+data class Week(val desc: String)
+
 @Model
-data class WeekUIModel(val weeks: List<String>, var selectedWeek: String?)
+data class WeekUIModel(val weeks: List<Week>, var selectedWeek: Week?)
