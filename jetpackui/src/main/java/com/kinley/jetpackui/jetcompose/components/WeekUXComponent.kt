@@ -20,7 +20,7 @@ import com.kinley.jetpackui.jetcompose.jetpack_views.ComposableView
 
 class WeekUXComponent(
   private val vmDelegate: WeekVMDelegate,
-  private val dataStream: WeekUIModel
+  dataStream: WeekUIModel
 ) : UXComponent<UIDelegate, WeekVMDelegate, WeekUIModel>(vmDelegate, dataStream) {
 
   override fun composableView(delegate: UIDelegate): ComposableView = {
@@ -31,25 +31,25 @@ class WeekUXComponent(
 @Composable
 fun HWeekListView(ui: UIDelegate, vm: WeekVMDelegate, data: WeekUIModel) {
   HStack {
-    data.weeks.forEach { week ->
-      WeekView(ui = ui, vm = vm, data = week, isSelected = week.equals(data.selectedWeek))
+    data.weeklyEarningReports.forEach { weeklyEarningReport ->
+      WeekView(ui = ui, vm = vm, weeklyEarningReport = weeklyEarningReport, isSelected = weeklyEarningReport.equals(data.selectedWeeklyEarningReport))
     }
   }
 }
 
 @Composable
-fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: WeeklyEarningReport, isSelected: Boolean) {
+fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, weeklyEarningReport: WeeklyEarningReport, isSelected: Boolean) {
 
   val color = Color(if (isSelected) R.color.golden else R.color.yellow)
   Container(padding = EdgeInsets(8.dp)) {
     Card(shape = RoundedCornerShape(10), color = color) {
 
       Clickable(onClick = {
-        vm.onWeekSelected(data)
+        vm.onWeekSelected(weeklyEarningReport)
       }) {
         VStack {
-          Text(text = "${data.startDate} - ${data.endDate}", modifier = LayoutPadding(8.dp))
-          Text(text = "Earning ${data.earnings}", modifier = LayoutPadding(8.dp))
+          Text(text = "${weeklyEarningReport.startDate} - ${weeklyEarningReport.endDate}", modifier = LayoutPadding(8.dp))
+          Text(text = "Earning ${weeklyEarningReport.earnings}", modifier = LayoutPadding(8.dp))
         }
       }
     }
@@ -68,6 +68,6 @@ interface WeekVMDelegate : VMDelegate {
 
 @Model
 data class WeekUIModel(
-  val weeks: List<WeeklyEarningReport>,
-  var selectedWeek: WeeklyEarningReport?
+  val weeklyEarningReports: List<WeeklyEarningReport>,
+  var selectedWeeklyEarningReport: WeeklyEarningReport?
 )

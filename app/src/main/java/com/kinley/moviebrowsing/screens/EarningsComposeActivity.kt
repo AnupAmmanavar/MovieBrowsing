@@ -16,7 +16,6 @@ import com.kinley.jetpackui.jetcompose.jetpack_views.render
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
 class EarningsComposeActivity : AppCompatActivity(), WeekUIDelegate {
 
@@ -66,12 +65,12 @@ class EarningsViewModel : WeekVMDelegate, DayVMDelegate, CoroutineScope by Corou
   override fun onWeekSelected(week: WeeklyEarningReport) {
     // Resetting the day
     dayUIModel.reset()
-    dayUIModel.days = week.dailyReports
-    weekUIModel.selectedWeek = week
+    dayUIModel.dailyReport = week.dailyReports
+    weekUIModel.selectedWeeklyEarningReport = week
   }
 
   override fun onDaySelected(day: DailyReport) {
-    dayUIModel.selectedDay = day
+    dayUIModel.selectedDailyReport = day
   }
 
 }

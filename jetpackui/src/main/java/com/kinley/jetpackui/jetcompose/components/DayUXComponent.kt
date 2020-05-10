@@ -35,38 +35,38 @@ interface DayVMDelegate : VMDelegate {
 
 @Model
 data class DayUIModel(
-  var days: List<DailyReport>,
-  var selectedDay: DailyReport?
+  var dailyReport: List<DailyReport>,
+  var selectedDailyReport: DailyReport?
 ) {
   fun reset() {
-    selectedDay = null
+    selectedDailyReport = null
   }
 }
 
 @Composable
 fun HDayListView(vmDelegate: DayVMDelegate, data: DayUIModel) {
   HStack {
-    data.days.forEach {
-      DayView(vmDelegate = vmDelegate, day = it, isSelected = it.id == data.selectedDay?.id)
+    data.dailyReport.forEach {
+      DayView(vmDelegate = vmDelegate, dailyReport = it, isSelected = it.id == data.selectedDailyReport?.id)
     }
   }
 }
 
 @Composable
-fun DayView(vmDelegate: DayVMDelegate, day: DailyReport, isSelected: Boolean) {
+fun DayView(vmDelegate: DayVMDelegate, dailyReport: DailyReport, isSelected: Boolean) {
   val color = Color(if (isSelected) R.color.golden else R.color.yellow)
   Clickable(onClick = {
-    vmDelegate.onDaySelected(day)
+    vmDelegate.onDaySelected(dailyReport)
   }) {
     Container(padding = EdgeInsets(8.dp)) {
       Card(shape = RoundedCornerShape(10), color = color) {
 
         VStack {
           if (isSelected)
-            Text(text = "Selected ${day.id}", modifier = LayoutPadding(8.dp))
+            Text(text = "${dailyReport.id}", modifier = LayoutPadding(8.dp))
           else
-            Text(text = day.id, modifier = LayoutPadding(8.dp))
-          Text(text = "Earning ${day.earnings}", modifier = LayoutPadding(8.dp))
+            Text(text = dailyReport.id, modifier = LayoutPadding(8.dp))
+          Text(text = "Earning ${dailyReport.earnings}", modifier = LayoutPadding(8.dp))
         }
 
 
