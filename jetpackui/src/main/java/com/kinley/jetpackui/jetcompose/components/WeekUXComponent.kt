@@ -59,11 +59,11 @@ fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, weeklyEarningReport: WeeklyEarn
 
 
 interface WeekUIDelegate : UIDelegate {
-  fun onWeekSelected(week: WeeklyEarningReport)
+  fun onWeekSelected(weeklyEarningReport: WeeklyEarningReport)
 }
 
 interface WeekVMDelegate : VMDelegate {
-  fun onWeekSelected(week: WeeklyEarningReport)
+  fun onWeekSelected(weeklyEarningReport: WeeklyEarningReport)
 }
 
 @Model

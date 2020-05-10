@@ -63,7 +63,7 @@ fun DayView(vmDelegate: DayVMDelegate, dailyReport: DailyReport, isSelected: Boo
 
         VStack {
           if (isSelected)
-            Text(text = "${dailyReport.id}", modifier = LayoutPadding(8.dp))
+            Text(text = dailyReport.id, modifier = LayoutPadding(8.dp))
           else
             Text(text = dailyReport.id, modifier = LayoutPadding(8.dp))
           Text(text = "Earning ${dailyReport.earnings}", modifier = LayoutPadding(8.dp))
