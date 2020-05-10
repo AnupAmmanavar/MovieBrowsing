@@ -11,8 +11,10 @@ import androidx.ui.layout.EdgeInsets
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
+import com.kinley.data.models.earnings.DailyReport
 import com.kinley.jetpackui.R
 import com.kinley.jetpackui.jetcompose.HStack
+import com.kinley.jetpackui.jetcompose.VStack
 import com.kinley.jetpackui.jetcompose.jetpack_views.ComposableView
 
 class DayUXComponent(
@@ -27,14 +29,15 @@ class DayUXComponent(
 }
 
 interface DayVMDelegate : VMDelegate {
-  fun onDaySelected(day: Day)
+  fun onDaySelected(day: DailyReport)
 }
 
 
-data class Day(val day: String)
-
 @Model
-data class DayUIModel(var days: List<Day>, var selectedDay: Day?) {
+data class DayUIModel(
+  var days: List<DailyReport>,
+  var selectedDay: DailyReport?
+) {
   fun reset() {
     selectedDay = null
   }
@@ -44,13 +47,13 @@ data class DayUIModel(var days: List<Day>, var selectedDay: Day?) {
 fun HDayListView(vmDelegate: DayVMDelegate, data: DayUIModel) {
   HStack {
     data.days.forEach {
-      DayView(vmDelegate = vmDelegate, day = it, isSelected = it.day == data.selectedDay?.day)
+      DayView(vmDelegate = vmDelegate, day = it, isSelected = it.id == data.selectedDay?.id)
     }
   }
 }
 
 @Composable
-fun DayView(vmDelegate: DayVMDelegate, day: Day, isSelected: Boolean) {
+fun DayView(vmDelegate: DayVMDelegate, day: DailyReport, isSelected: Boolean) {
   val color = Color(if (isSelected) R.color.golden else R.color.yellow)
   Clickable(onClick = {
     vmDelegate.onDaySelected(day)
@@ -58,11 +61,15 @@ fun DayView(vmDelegate: DayVMDelegate, day: Day, isSelected: Boolean) {
     Container(padding = EdgeInsets(8.dp)) {
       Card(shape = RoundedCornerShape(10), color = color) {
 
+        VStack {
+          if (isSelected)
+            Text(text = "Selected ${day.id}", modifier = LayoutPadding(8.dp))
+          else
+            Text(text = day.id, modifier = LayoutPadding(8.dp))
+          Text(text = "Earning ${day.earnings}", modifier = LayoutPadding(8.dp))
+        }
 
-        if (isSelected)
-          Text(text = "Selected ${day.day}", modifier = LayoutPadding(8.dp))
-        else
-          Text(text = day.day, modifier = LayoutPadding(8.dp))
+
       }
     }
   }

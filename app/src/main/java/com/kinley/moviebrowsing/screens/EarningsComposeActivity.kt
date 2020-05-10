@@ -6,12 +6,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.ui.core.setContent
 import androidx.ui.material.MaterialTheme
+import com.kinley.data.models.earnings.DailyReport
+import com.kinley.data.models.earnings.WeeklyEarningReport
+import com.kinley.data.repository.OrderEarningRepositoryImpl
+import com.kinley.data.repository.OrderEarningsRepository
 import com.kinley.jetpackui.jetcompose.VStack
 import com.kinley.jetpackui.jetcompose.components.*
 import com.kinley.jetpackui.jetcompose.jetpack_views.render
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 class EarningsComposeActivity : AppCompatActivity(), WeekUIDelegate {
 
@@ -30,7 +35,7 @@ class EarningsComposeActivity : AppCompatActivity(), WeekUIDelegate {
     }
   }
 
-  override fun onWeekSelected(week: Week) {
+  override fun onWeekSelected(week: WeeklyEarningReport) {
     vm.onWeekSelected(week)
   }
 }
@@ -42,21 +47,30 @@ class EarningsViewModel : WeekVMDelegate, DayVMDelegate, CoroutineScope by Corou
 
   var dayUXComponent: DayUXComponent
 
-  private var weekUIModel: WeekUIModel = WeekUIModel(arrayListOf("0", "1", "2", "3", "4", "5", "6", "7").map { Week(it) }, null)
-  private var dayUIModel: DayUIModel = DayUIModel(arrayListOf("1", "2", "3", "4", "5", "6", "7").map { Day(it) }, null)
+  private val earningsRepository: OrderEarningsRepository = OrderEarningRepositoryImpl()
+
+  private var weekUIModel: WeekUIModel = WeekUIModel(emptyList(), null)
+  private var dayUIModel: DayUIModel = DayUIModel(emptyList(), null)
 
   init {
-    weekUXComponent = WeekUXComponent(this, weekUIModel)
-    dayUXComponent = DayUXComponent(this, dayUIModel)
+
+    val reports = earningsRepository.getWeeklyReportList()
+    weekUIModel = WeekUIModel(reports, null)
+
+    weekUXComponent = WeekUXComponent(this@EarningsViewModel, weekUIModel)
+    dayUXComponent = DayUXComponent(this@EarningsViewModel, dayUIModel)
+
+
   }
 
-  override fun onWeekSelected(week: Week) {
+  override fun onWeekSelected(week: WeeklyEarningReport) {
     // Resetting the day
     dayUIModel.reset()
+    dayUIModel.days = week.dailyReports
     weekUIModel.selectedWeek = week
   }
 
-  override fun onDaySelected(day: Day) {
+  override fun onDaySelected(day: DailyReport) {
     dayUIModel.selectedDay = day
   }
 

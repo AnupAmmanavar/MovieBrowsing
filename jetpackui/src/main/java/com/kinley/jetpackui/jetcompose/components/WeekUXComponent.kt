@@ -11,8 +11,10 @@ import androidx.ui.layout.EdgeInsets
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
+import com.kinley.data.models.earnings.WeeklyEarningReport
 import com.kinley.jetpackui.R
 import com.kinley.jetpackui.jetcompose.HStack
+import com.kinley.jetpackui.jetcompose.VStack
 import com.kinley.jetpackui.jetcompose.jetpack_views.ComposableView
 
 
@@ -36,7 +38,7 @@ fun HWeekListView(ui: UIDelegate, vm: WeekVMDelegate, data: WeekUIModel) {
 }
 
 @Composable
-fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: Week, isSelected: Boolean) {
+fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: WeeklyEarningReport, isSelected: Boolean) {
 
   val color = Color(if (isSelected) R.color.golden else R.color.yellow)
   Container(padding = EdgeInsets(8.dp)) {
@@ -45,7 +47,10 @@ fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: Week, isSelected: Boolean
       Clickable(onClick = {
         vm.onWeekSelected(data)
       }) {
-        Text(text = "Week ${data.desc}", modifier = LayoutPadding(8.dp))
+        VStack {
+          Text(text = "${data.startDate} - ${data.endDate}", modifier = LayoutPadding(8.dp))
+          Text(text = "Earning ${data.earnings}", modifier = LayoutPadding(8.dp))
+        }
       }
     }
   }
@@ -54,14 +59,15 @@ fun WeekView(ui: UIDelegate, vm: WeekVMDelegate, data: Week, isSelected: Boolean
 
 
 interface WeekUIDelegate : UIDelegate {
-  fun onWeekSelected(week: Week)
+  fun onWeekSelected(week: WeeklyEarningReport)
 }
 
 interface WeekVMDelegate : VMDelegate {
-  fun onWeekSelected(week: Week)
+  fun onWeekSelected(week: WeeklyEarningReport)
 }
 
-data class Week(val desc: String)
-
 @Model
-data class WeekUIModel(val weeks: List<Week>, var selectedWeek: Week?)
+data class WeekUIModel(
+  val weeks: List<WeeklyEarningReport>,
+  var selectedWeek: WeeklyEarningReport?
+)
