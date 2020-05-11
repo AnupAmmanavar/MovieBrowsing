@@ -38,7 +38,7 @@ data class DayUIModel(
   var dailyReport: List<DailyReport>,
   var selectedDailyReport: DailyReport?
 ) {
-  fun reset() {
+  fun resetSelectedDay() {
     selectedDailyReport = null
   }
 }
