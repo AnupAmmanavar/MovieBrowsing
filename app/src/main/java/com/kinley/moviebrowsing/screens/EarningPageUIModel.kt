@@ -33,7 +33,7 @@ data class EarningPageUIModel(
   fun updateDay(dailyReport: DailyReport) {
 
     with(earningsUIModel) {
-      earnings = dayUIModel.selectedDailyReport?.orderEarnings ?: arrayListOf()
+      earnings = dailyReport.orderEarnings
     }
 
     with(dayUIModel) {

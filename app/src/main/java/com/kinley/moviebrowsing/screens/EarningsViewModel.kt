@@ -34,8 +34,8 @@ class EarningsViewModel : WeekVMDelegate, DayVMDelegate, CoroutineScope by Corou
     earningPageUIModel.updateWeek(weeklyEarningReport = weeklyEarningReport)
   }
 
-  override fun onDaySelected(day: DailyReport) {
-    earningPageUIModel.updateDay(dailyReport = day)
+  override fun onDaySelected(dailyReport: DailyReport) {
+    earningPageUIModel.updateDay(dailyReport = dailyReport)
   }
 
 }

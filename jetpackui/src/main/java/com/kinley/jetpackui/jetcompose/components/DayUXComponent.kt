@@ -29,7 +29,7 @@ class DayUXComponent(
 }
 
 interface DayVMDelegate : VMDelegate {
-  fun onDaySelected(day: DailyReport)
+  fun onDaySelected(dailyReport: DailyReport)
 }
 
 
